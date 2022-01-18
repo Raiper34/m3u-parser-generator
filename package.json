@@ -1,7 +1,10 @@
 {
   "name": "m3u-parser-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Library to parse and generate m3u or m3u8 IPTV playlist files",
+  "keywords": ["m3u", "m3u8", "m3u parser", "m3u generator", "iptv"],
+  "repository": "https://github.com/Raiper34/m3u-parser-generator",
+  "homepage": "https://github.com/Raiper34/m3u-parser-generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,8 +13,8 @@
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "publish": "npm run build && npm publish"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Raiper34",
+  "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^3.6.6",
     "jasmine": "^3.6.4",
