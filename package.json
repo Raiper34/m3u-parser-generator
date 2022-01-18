@@ -1,0 +1,21 @@
+{
+  "name": "m3u-parser-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npm run build & node dist/main.js",
+    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
+    "publish": "npm run build && npm publish"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^3.6.6",
+    "jasmine": "^3.6.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.5.4"
+  }
+}
