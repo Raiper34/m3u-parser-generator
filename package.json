@@ -17,7 +17,8 @@
     "build": "npx tsc",
     "start": "npm run build & node dist/main.js",
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
-    "publish": "npm run build && npm publish"
+    "publish": "npm run build && npm publish",
+    "changelog": "changelog generate"
   },
   "author": "Raiper34",
   "license": "MIT",
