@@ -2,7 +2,13 @@
   "name": "m3u-parser-generator",
   "version": "1.0.0",
   "description": "Library to parse and generate m3u or m3u8 IPTV playlist files",
-  "keywords": ["m3u", "m3u8", "m3u parser", "m3u generator", "iptv"],
+  "keywords": [
+    "m3u",
+    "m3u8",
+    "m3u parser",
+    "m3u generator",
+    "iptv"
+  ],
   "repository": "https://github.com/Raiper34/m3u-parser-generator",
   "homepage": "https://github.com/Raiper34/m3u-parser-generator",
   "main": "dist/index.js",
