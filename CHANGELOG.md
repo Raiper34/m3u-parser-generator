@@ -1,4 +1,4 @@
-#### 1.0.0 (2022-01-24)
+#### 1.0.1 (2022-01-24)
 
 ##### Breaking Changes
 
@@ -7,4 +7,9 @@
 ##### Continuous Integration
 
 * **circleci:**  add circle ci to project (ee27e6d9)
+
+##### Other Changes
+
+* **badges:**  add circle ci badge and others (f662b31c)
+
 
