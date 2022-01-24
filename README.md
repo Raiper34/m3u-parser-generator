@@ -1,3 +1,7 @@
+[![npm version](https://badge.fury.io/js/m3u-parser-generator.svg)](https://badge.fury.io/js/m3u-parser-generator)
+[![CircleCI](https://circleci.com/gh/Raiper34/m3u-parser-generator.svg?style=shield)](https://circleci.com/gh/Raiper34/m3u-parser-generator)
+![NPM](https://img.shields.io/npm/l/m3u-parser-generator)
+
 # M3U Parser Generator
 Library to parse and generate m3u or m3u8 IPTV playlist files. 
 
