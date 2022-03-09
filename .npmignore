@@ -1,6 +1,4 @@
 .idea
 node_modules
 .circleci
-test
-jasmine.json
 
