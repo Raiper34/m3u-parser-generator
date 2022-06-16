@@ -1,5 +1,6 @@
 [![npm version](https://badge.fury.io/js/m3u-parser-generator.svg)](https://badge.fury.io/js/m3u-parser-generator)
 [![CircleCI](https://circleci.com/gh/Raiper34/m3u-parser-generator.svg?style=shield)](https://circleci.com/gh/Raiper34/m3u-parser-generator)
+[![Coverage Status](https://coveralls.io/repos/github/Raiper34/m3u-parser-generator/badge.svg?branch=main)](https://coveralls.io/github/Raiper34/m3u-parser-generator?branch=main)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/m3u-parser-generator)
 ![NPM](https://img.shields.io/npm/l/m3u-parser-generator)
 [![stack blitz](https://badgen.net/badge/stackblitz/online/orange)](https://stackblitz.com/edit/typescript-x6lc4j)
