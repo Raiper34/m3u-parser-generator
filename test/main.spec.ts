@@ -1,6 +1,5 @@
-import {M3uParser} from "../src/m3u-parser";
+import {M3uMedia, M3uParser, M3uPlaylist} from "../src";
 import {complex, extGroupDirectiveOrder} from "./test-m3u";
-import {M3uMedia, M3uPlaylist} from "../dist";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
