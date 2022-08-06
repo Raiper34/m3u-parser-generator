@@ -16,8 +16,9 @@
   "scripts": {
     "build": "npx tsc",
     "start": "npm run build & node dist/main.js",
-    "test": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
-    "release": "npm run build && npm publish"
+    "test": "nyc -r lcov jasmine-ts --config=jasmine.json",
+    "test:ci": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
+    "publish": "npm run build && npm publish"
   },
   "author": "Raiper34",
   "license": "MIT",
