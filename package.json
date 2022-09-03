@@ -14,7 +14,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npx tsc && browserify dist/index.js -o dist/browser-bundle.js -s m3uParserGenerator",
+    "build": "npx tsc && browserify dist/index.js -o dist/browser-bundle.js -s m3uParserGenerator && uglifyjs dist/browser-bundle.js -o dist/browser-bundle.min.js",
     "start": "npm run build & node dist/main.js",
     "test": "nyc -r lcov jasmine-ts --config=jasmine.json",
     "test:ci": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
@@ -30,6 +30,7 @@
     "jasmine-ts": "^0.4.0",
     "nyc": "^15.1.0",
     "ts-node": "^9.1.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "uglify-js": "^3.17.0"
   }
 }
