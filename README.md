@@ -104,8 +104,8 @@ Import script into HTML file, and you can access classes through the global `m3u
 <script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@1/dist/browser-bundle.min.js"></script>
 <script>
     const playlist = new m3uParserGenerator.M3uPlaylist();
-    
     const media1 = new m3uParserGenerator.M3uMedia('http://my-stream-ulr.com/playlist.m3u8');
+    playlist.medias.push(media1);
     
     const parsedPlaylist = m3uParserGenerator.M3uParser.parse(m3uString);
 </script>
