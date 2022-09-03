@@ -1,3 +1,8 @@
+#### 1.0.5 (2022-09-03)
+
+* browser bundle
+* coveralls readme badge
+
 #### 1.0.4 (2022-03-09)
 
 * remove unit tests from npm dist package
