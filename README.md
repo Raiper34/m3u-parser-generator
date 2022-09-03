@@ -96,3 +96,17 @@ you get
 #EXTGRP:Test Group
 http://my-stream-ulr.com/playlist.m3u8
 ```
+
+# Usage in browser
+You can also use this library in the browser without compiling using jsDelivr.
+Import script into HTML file, and you can access classes through the global `m3uParserGenerator` object.
+```html
+<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@1/dist/browser-bundle.min.js"></script>
+<script>
+    const playlist = new m3uParserGenerator.M3uPlaylist();
+    
+    const media1 = new m3uParserGenerator.M3uMedia('http://my-stream-ulr.com/playlist.m3u8');
+    
+    const parsedPlaylist = m3uParserGenerator.M3uParser.parse(m3uString);
+</script>
+```
