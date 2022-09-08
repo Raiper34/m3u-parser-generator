@@ -1,4 +1,8 @@
-#### 1.0.5 (2022-09-03)
+#### 1.1.1 (2022-09-08)
+
+* \#EXTM3U tag do not need to be placed on own line
+
+#### 1.1.0 (2022-09-03)
 
 * browser bundle
 * coveralls readme badge

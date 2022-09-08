@@ -110,3 +110,6 @@ Import script into HTML file, and you can access classes through the global `m3u
     const parsedPlaylist = m3uParserGenerator.M3uParser.parse(m3uString);
 </script>
 ```
+
+# License
+MIT
