@@ -88,7 +88,7 @@ export class M3uParser {
   }
 
   private static isValidM3u(firstLine: string[]): boolean {
-    return firstLine[0].replace('\n', '') === M3uDirectives.EXTM3U;
+    return firstLine[0].startsWith(M3uDirectives.EXTM3U);
   }
 
   static parse(m3uString: string): M3uPlaylist {
