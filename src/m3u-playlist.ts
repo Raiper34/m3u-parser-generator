@@ -10,7 +10,7 @@ export enum M3uDirectives {
 }
 
 export class M3uPlaylist {
-  title: string = '';
+  title = '';
   medias: M3uMedia[] = [];
 
   getM3uString(): string {

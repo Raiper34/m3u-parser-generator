@@ -18,19 +18,24 @@
     "start": "npm run build & node dist/main.js",
     "test": "nyc -r lcov jasmine-ts --config=jasmine.json",
     "test:ci": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
     "publish": "npm run build && npm publish"
   },
   "author": "Raiper34",
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^3.6.6",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "browserify": "^17.0.0",
     "coveralls": "^3.1.1",
+    "eslint": "^8.23.0",
     "jasmine": "^3.6.4",
     "jasmine-ts": "^0.4.0",
     "nyc": "^15.1.0",
     "ts-node": "^9.1.1",
-    "typescript": "^4.5.4",
+    "typescript": "^4.8.3",
     "uglify-js": "^3.17.0"
   }
 }
