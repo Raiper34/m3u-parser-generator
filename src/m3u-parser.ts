@@ -12,12 +12,6 @@ import {
 export class M3uParser {
 
   /**
-   * Unused constructor for static class
-   * @ignore
-   */
-  constructor() { }
-
-  /**
    * Get m3u attributes object from attributes string
    * @param attributesString e.g. 'tvg-id="" group-title=""'
    * @returns attributes object e.g. {"tvg-id": "", "group-title": ""}

@@ -18,8 +18,8 @@
     "start": "npm run build & node dist/main.js",
     "test": "nyc -r lcov jasmine-ts --config=jasmine.json",
     "test:ci": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix",
+    "lint": "npx eslint ./src",
+    "lint:fix": "npx eslint ./src --fix",
     "docs": "npx typedoc src/index.ts",
     "deploy": "npm run docs && netlify deploy --dir=docs --prod",
     "publish": "npm run build && npm publish"

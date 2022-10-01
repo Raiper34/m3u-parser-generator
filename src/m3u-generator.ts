@@ -12,12 +12,6 @@ import {
 export class M3uGenerator {
 
   /**
-   * Unused constructor for static class
-   * @ignore
-   */
-  constructor() { }
-
-  /**
    * Generate is static method to generate m3u playlist string from playlist object
    * @param playlist - playlist object to generate m3u playlist string
    * @returns final m3u playlist string
