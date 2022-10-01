@@ -3,3 +3,7 @@ node_modules
 dist
 coverage
 .nyc_output
+docs
+
+# Local Netlify folder
+.netlify

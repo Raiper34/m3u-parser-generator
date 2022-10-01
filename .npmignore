@@ -1,4 +1,7 @@
 .idea
 node_modules
 .circleci
+coverage
+.nyc_output
+docs
 

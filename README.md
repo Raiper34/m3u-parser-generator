@@ -4,6 +4,8 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/min/m3u-parser-generator)
 ![NPM](https://img.shields.io/npm/l/m3u-parser-generator)
 [![stack blitz](https://badgen.net/badge/stackblitz/online/orange)](https://stackblitz.com/edit/typescript-x6lc4j)
+[![docs](https://badgen.net/badge/docs/online/orange)](https://m3u-parser-generator.netlify.app)
+[![](https://data.jsdelivr.com/v1/package/npm/m3u-parser-generator/badge?style=rounded)](https://www.jsdelivr.com/package/npm/m3u-parser-generator)
 
 # M3U Parser Generator
 Library to parse and generate [m3u or m3u8 IPTV playlist files](https://en.wikipedia.org/wiki/M3U). 

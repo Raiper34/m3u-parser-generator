@@ -10,7 +10,7 @@
     "iptv"
   ],
   "repository": "https://github.com/Raiper34/m3u-parser-generator",
-  "homepage": "https://github.com/Raiper34/m3u-parser-generator",
+  "homepage": "https://m3u-parser-generator.netlify.app",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -20,6 +20,8 @@
     "test:ci": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
+    "docs": "npx typedoc src/index.ts",
+    "deploy": "npm run docs && netlify deploy --dir=docs --prod",
     "publish": "npm run build && npm publish"
   },
   "author": "Raiper34",
@@ -33,8 +35,10 @@
     "eslint": "^8.23.0",
     "jasmine": "^3.6.4",
     "jasmine-ts": "^0.4.0",
+    "netlify-cli": "^12.0.2",
     "nyc": "^15.1.0",
     "ts-node": "^9.1.1",
+    "typedoc": "^0.22.18",
     "typescript": "^4.8.3",
     "uglify-js": "^3.17.0"
   }
