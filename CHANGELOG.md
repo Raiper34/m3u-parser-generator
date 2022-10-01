@@ -1,3 +1,9 @@
+#### 1.2.0 (2022-10-01)
+
+* add API documentation
+* add delivrJs badge
+* build project on node 14
+
 #### 1.1.1 (2022-09-08)
 
 * \#EXTM3U tag do not need to be placed on own line
