@@ -18,11 +18,14 @@ export class M3uParser {
    * @private
    */
   private static getAttributes(attributesString: string): M3uAttributes {
-    const attributeValuePair = attributesString.split('" ');
     const attributes: M3uAttributes = new M3uAttributes();
+    if (!attributesString) {
+      return attributes;
+    }
+    const attributeValuePair = attributesString.split('" ');
     attributeValuePair.forEach((item) => {
       const [key, value] = item.split('="');
-      attributes[key] = value.replace('"', '');
+      attributes[key] = value ? value.replace('"', '') : value;
     });
     return attributes;
   }
@@ -39,8 +42,9 @@ export class M3uParser {
     media.name = trackInformation.substring(lastCommaIndex + 1);
 
     const firstSpaceIndex = durationAttributes.indexOf(' ');
-    media.duration = Number(durationAttributes.substring(0, firstSpaceIndex));
-    const attributes = durationAttributes.substring(firstSpaceIndex + 1);
+    const durationEndIndex = firstSpaceIndex > 0 ? firstSpaceIndex : durationAttributes.length;
+    media.duration = Number(durationAttributes.substring(0, durationEndIndex));
+    const attributes = durationAttributes.substring(durationEndIndex + 1);
 
     media.attributes = this.getAttributes(attributes);
   }
