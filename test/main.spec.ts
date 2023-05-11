@@ -24,7 +24,7 @@ describe('Parse and generate test', () => {
         expect(playlist.getM3uString()).toEqual('#EXTM3U\nlocation');
     });
 
-    it('should parse empty attributes as empty', () => {
+    it('should be parsed when no attributes are present', () => {
         const parsed = M3uParser.parse(attributes);
         expect(Object.keys(parsed.medias[0].attributes)).toEqual([]);
         expect(Object.keys(parsed.medias[1].attributes)).not.toEqual([]);
