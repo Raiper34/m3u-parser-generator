@@ -1,9 +1,10 @@
 import {M3uMedia, M3uParser, M3uPlaylist} from "../src";
-import {complex, extGroupDirectiveOrder} from "./test-m3u";
+import {complex, extGroupDirectiveOrder, attributes} from "./test-m3u";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
         expect(M3uParser.parse(complex).getM3uString()).toEqual(complex);
+        expect(M3uParser.parse(attributes).getM3uString()).toEqual(attributes);
     });
 
     it('should be parsed when random order of #EXTGRP directive is present', () => {
