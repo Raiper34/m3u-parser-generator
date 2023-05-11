@@ -23,4 +23,10 @@ describe('Parse and generate test', () => {
         playlist.medias.push(new M3uMedia('location'));
         expect(playlist.getM3uString()).toEqual('#EXTM3U\nlocation');
     });
+
+    it('should parse empty attributes as empty', () => {
+        const parsed = M3uParser.parse(attributes);
+        expect(Object.keys(parsed.medias[0].attributes)).toEqual([]);
+        expect(Object.keys(parsed.medias[1].attributes)).not.toEqual([]);
+    });
 });
