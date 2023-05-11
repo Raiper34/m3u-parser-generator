@@ -29,4 +29,8 @@ describe('Parse and generate test', () => {
         expect(Object.keys(parsed.medias[0].attributes)).toEqual([]);
         expect(Object.keys(parsed.medias[1].attributes)).not.toEqual([]);
     });
+
+    it('should raise exception when parsing invalid m3u string', () => {
+        expect(() => M3uParser.parse('')).toThrow(new Error(`m3uString can't be null!`));
+    });
 });
