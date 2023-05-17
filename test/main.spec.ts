@@ -1,10 +1,10 @@
 import {M3uMedia, M3uParser, M3uPlaylist} from "../src";
-import {complex, extGroupDirectiveOrder, attributes} from "./test-m3u";
+import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes} from "./test-m3u";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
         expect(M3uParser.parse(complex).getM3uString()).toEqual(complex);
-        expect(M3uParser.parse(attributes).getM3uString()).toEqual(attributes);
+        expect(M3uParser.parse(emptyAttributes).getM3uString()).toEqual(emptyAttributes);
     });
 
     it('should be parsed when random order of #EXTGRP directive is present', () => {
@@ -25,12 +25,16 @@ describe('Parse and generate test', () => {
     });
 
     it('should be parsed when no attributes are present', () => {
-        const parsed = M3uParser.parse(attributes);
+        const parsed = M3uParser.parse(emptyAttributes);
         expect(Object.keys(parsed.medias[0].attributes)).toEqual([]);
         expect(Object.keys(parsed.medias[1].attributes)).not.toEqual([]);
     });
 
     it('should raise exception when parsing invalid m3u string', () => {
         expect(() => M3uParser.parse('')).toThrow(new Error(`m3uString can't be null!`));
+    });
+
+    it('should raise exception when parsing invalid attribute string', () => {
+        expect(() => M3uParser.parse(invalidAttributes)).toThrow(new Error(`Attribute value can't be null!`));
     });
 });
