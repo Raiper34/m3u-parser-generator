@@ -18,10 +18,16 @@ export class M3uParser {
    * @private
    */
   private static getAttributes(attributesString: string): M3uAttributes {
-    const attributeValuePair = attributesString.split('" ');
     const attributes: M3uAttributes = new M3uAttributes();
+    if (!attributesString) {
+      return attributes;
+    }
+    const attributeValuePair = attributesString.split('" ');
     attributeValuePair.forEach((item) => {
       const [key, value] = item.split('="');
+      if (value == null) {
+        throw new Error(`Attribute value can't be null!`);
+      }
       attributes[key] = value.replace('"', '');
     });
     return attributes;
@@ -39,8 +45,9 @@ export class M3uParser {
     media.name = trackInformation.substring(lastCommaIndex + 1);
 
     const firstSpaceIndex = durationAttributes.indexOf(' ');
-    media.duration = Number(durationAttributes.substring(0, firstSpaceIndex));
-    const attributes = durationAttributes.substring(firstSpaceIndex + 1);
+    const durationEndIndex = firstSpaceIndex > 0 ? firstSpaceIndex : durationAttributes.length;
+    media.duration = Number(durationAttributes.substring(0, durationEndIndex));
+    const attributes = durationAttributes.substring(durationEndIndex + 1);
 
     media.attributes = this.getAttributes(attributes);
   }
@@ -115,7 +122,8 @@ export class M3uParser {
 
   /**
    * Parse is static method to parse m3u playlist string into m3u playlist object.
-   * Playlist need to contains #EXTM3U directive on first line.
+   * Playlist need to contain #EXTM3U directive on first line.
+   * All lines are trimmed and blank ones are removed.
    * @param m3uString - whole m3u playlist string
    * @returns parsed m3u playlist object
    * @example
@@ -125,7 +133,12 @@ export class M3uParser {
    * ```
    */
   static parse(m3uString: string): M3uPlaylist {
-    const lines = m3uString.split('\n').filter(item => item);
+    if (!m3uString) {
+      throw new Error(`m3uString can't be null!`);
+    }
+
+    const lines = m3uString.split('\n').map(item => item.trim()).filter(item => item != '');
+
     if (!this.isValidM3u(lines)) {
       throw new Error(`Missing ${M3uDirectives.EXTM3U} directive!`);
     }

@@ -35,8 +35,8 @@ export class M3uGenerator {
    * @private
    */
   private static getMedia(media: M3uMedia): string {
-    const attributesString =  this.getAttributes(media.attributes);
-    const info = this.shouldAddInfoDirective(media, attributesString) ? `${M3uDirectives.EXTINF}:${media.duration} ${attributesString},${media.name}` : null;
+    const attributesString = this.getAttributes(media.attributes);
+    const info = this.shouldAddInfoDirective(media, attributesString) ? `${M3uDirectives.EXTINF}:${media.duration}${attributesString},${media.name}` : null;
     const group = media.group ? `${M3uDirectives.EXTGRP}:${media.group}` : null;
     return [info, group, media.location].filter(item => item).join('\n');
   }
@@ -48,7 +48,8 @@ export class M3uGenerator {
    * @private
    */
   private static getAttributes(attributes: M3uAttributes): string {
-    return Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(' ');
+    const keys = Object.keys(attributes);
+    return keys.length ? ' ' + keys.map(key => `${key}="${attributes[key]}"`).join(' ') : '';
   }
 
   /**
