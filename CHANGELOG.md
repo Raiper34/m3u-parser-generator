@@ -1,3 +1,7 @@
+#### 1.3.0 (2023-18-06)
+* ignore blank lines
+* fix empty attributes
+
 #### 1.2.0 (2022-10-01)
 
 * add API documentation
