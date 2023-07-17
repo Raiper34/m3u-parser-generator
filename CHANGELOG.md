@@ -1,4 +1,7 @@
-#### 1.3.0 (2023-18-06)
+#### 1.4.0 (2023-07-17)
+* ability to ignore file errors during parsing (`ignoreErrors` argument)
+
+#### 1.3.0 (2023-06-18)
 * ignore blank lines
 * fix empty attributes
 
