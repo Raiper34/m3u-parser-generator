@@ -34,6 +34,10 @@ describe('Parse and generate test', () => {
         expect(() => M3uParser.parse('')).toThrow(new Error(`m3uString can't be null!`));
     });
 
+    it('should NOT raise exception when parsing invalid m3u string with ignoreErrors argument', () => {
+        expect(() => M3uParser.parse('', true)).not.toThrow(new Error(`m3uString can't be null!`));
+    });
+
     it('should raise exception when parsing invalid attribute string', () => {
         expect(() => M3uParser.parse(invalidAttributes)).toThrow(new Error(`Attribute value can't be null!`));
     });
