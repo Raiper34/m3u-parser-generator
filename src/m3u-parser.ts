@@ -23,14 +23,20 @@ export class M3uParser {
     if (!attributesString) {
       return attributes;
     }
+    try {
     const attributeValuePair = attributesString.split('" ');
     attributeValuePair.forEach((item) => {
       const [key, value] = item.split('="');
-      if (!ignoreErrors && value == null) {
+      if (value == null) {
         throw new Error(`Attribute value can't be null!`);
       }
       attributes[key] = value.replace('"', '');
     });
+    } catch (error: unknown) {
+      if (!ignoreErrors) {
+        throw new Error((error as {message: string}).message)
+      }
+    }
     return attributes;
   }
 

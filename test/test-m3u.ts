@@ -33,3 +33,14 @@ http://iptv.test1.com/playlist.m3u8
 #EXTINF:100 unknown=" tvg-id="Test tv 2" tvg-country="SK" tvg-language="SK" tvg-logo="logo2.png" group-title="Test2",Test tv 2 [SK]
 #EXTGRP:Test TV group 2
 http://iptv.test2.com/playlist.m3u8`;
+
+export const invalidPlaylist = `
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country=" tvg-language="CS",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#INVALID:Something
+playlist.m3u
+#EXTINF:100 group-title="Test2"Test tv 2 [SK]
+#EXTGRP:
+playlist.m3u`;
+
+

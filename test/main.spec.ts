@@ -1,5 +1,5 @@
-import {M3uMedia, M3uParser, M3uPlaylist} from "../src";
-import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes} from "./test-m3u";
+import {M3uAttributes, M3uMedia, M3uParser, M3uPlaylist} from "../src";
+import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes, invalidPlaylist} from "./test-m3u";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
@@ -41,4 +41,24 @@ describe('Parse and generate test', () => {
     it('should raise exception when parsing invalid attribute string', () => {
         expect(() => M3uParser.parse(invalidAttributes)).toThrow(new Error(`Attribute value can't be null!`));
     });
+
+    it('should parse with invalid attributes', () => {
+        const attr = new M3uAttributes();
+        attr["tvg-id"] = 'Test tv 1';
+        const media1 = new M3uMedia('playlist.m3u');
+        media1.name = 'Test tv 1 [CZ]';
+        media1.group = 'Test TV group 1';
+        media1.attributes = attr;
+
+        const media2 = new M3uMedia('playlist.m3u');
+        media2.name = '100 group-title="Test2"Test tv 2 [SK]';
+        media2.group = '';
+        media2.duration = 0;
+
+        const expectedPlaylist = new M3uPlaylist();
+        expectedPlaylist.medias = [media1, media2]
+
+        expect(M3uParser.parse(invalidPlaylist, true)).toEqual(expectedPlaylist);
+    });
+
 });
