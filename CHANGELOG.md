@@ -1,3 +1,6 @@
+#### 1.4.1 (2023-10-21)
+* fix ignoreErrors to be able also parse playlists with errors
+
 #### 1.4.0 (2023-07-17)
 * ability to ignore file errors during parsing (`ignoreErrors` argument)
 
