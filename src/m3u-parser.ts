@@ -93,6 +93,16 @@ export class M3uParser {
         media.extraHttpHeaders = JSON.parse(trackInformation);
         break;
       }
+      case M3uDirectives.KODIPROP: {
+        const [key, value] = trackInformation.split('=');
+
+        if(!media.kodiProps) {
+          media.kodiProps = new Map<string, string>();
+        }
+
+        media.kodiProps.set(key, value);
+        break;
+      }
     }
   }
 

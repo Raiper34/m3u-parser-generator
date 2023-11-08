@@ -41,11 +41,13 @@ export class M3uGenerator {
     const group = media.group ? `${M3uDirectives.EXTGRP}:${media.group}` : null;
     const extraAttributesFromUrl = media.extraAttributesFromUrl ? `${M3uDirectives.EXTATTRFROMURL}:${media.extraAttributesFromUrl}` : null;
     const extraHttpHeaders = media.extraHttpHeaders ? `${M3uDirectives.EXTHTTP}:${JSON.stringify(media.extraHttpHeaders)}` : null;
+    const kodiProps = media.kodiProps ? [...media.kodiProps].map(([key, value]) => `${M3uDirectives.KODIPROP}:${key}=${value}`).join('\n') : null;
     return [
       info,
       group,
       extraAttributesFromUrl,
       extraHttpHeaders,
+      kodiProps,
       media.location
     ].filter(item => item).join('\n');
   }

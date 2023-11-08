@@ -9,6 +9,7 @@ export enum M3uDirectives {
   EXTGRP = '#EXTGRP',
   EXTATTRFROMURL = '#EXTATTRFROMURL',
   EXTHTTP = '#EXTHTTP',
+  KODIPROP = '#KODIPROP'
 }
 
 /**
@@ -90,6 +91,11 @@ export class M3uMedia {
    * Extra HTTP headers
    */
   extraHttpHeaders?: unknown = undefined;
+
+  /**
+   * Kodi props
+   */
+  kodiProps?: Map<string, string> = new Map<string, string>();
 
   /**
    * Constructor

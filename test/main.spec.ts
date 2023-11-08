@@ -7,7 +7,8 @@ import {
     invalidPlaylist,
     urlTvgTags,
     playlistWithExtAttrFromUrl,
-    playlistWithExtraHTTPHeaders
+    playlistWithExtraHTTPHeaders,
+    playlistWithKodiProps
 } from "./test-m3u";
 
 describe('Parse and generate test', () => {
@@ -122,6 +123,36 @@ describe('Parse and generate test', () => {
         const playlist = new M3uPlaylist();
         playlist.medias.push(media);
         expect(playlist.getM3uString()).toEqual(playlistWithExtraHTTPHeaders);
+    });
+
+    it('should parse kodi props', () => {
+        const playlist = M3uParser.parse(playlistWithKodiProps);
+        expect(playlist.medias[0].kodiProps).toEqual(new Map([
+            [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
+            [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
+            [ 'inputstream.adaptive.license_key', 'test' ]
+        ]));
+    });
+
+    it('should write kodi props', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        media.kodiProps = new Map([
+            [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
+            [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
+            [ 'inputstream.adaptive.license_key', 'test' ]
+        ]);
+        const playlist = new M3uPlaylist();
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithKodiProps);
     });
 
 });
