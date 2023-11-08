@@ -44,3 +44,4 @@ playlist.m3u
 playlist.m3u`;
 
 
+export const urlTvgTags = `#EXTM3U url-tvg="http://example.com/tvg.xml"`;

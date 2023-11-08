@@ -1,5 +1,5 @@
 import {M3uAttributes, M3uMedia, M3uParser, M3uPlaylist} from "../src";
-import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes, invalidPlaylist} from "./test-m3u";
+import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes, invalidPlaylist, urlTvgTags} from "./test-m3u";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
@@ -59,6 +59,17 @@ describe('Parse and generate test', () => {
         expectedPlaylist.medias = [media1, media2]
 
         expect(M3uParser.parse(invalidPlaylist, true)).toEqual(expectedPlaylist);
+    });
+
+    it('should parse url-tvg attribute', () => {
+        const playlist = M3uParser.parse(urlTvgTags);
+        expect(playlist.urlTvg).toEqual('http://example.com/tvg.xml');
+    });
+
+    it('should write url-tvg attribute', () => {
+        const playlist = new M3uPlaylist();
+        playlist.urlTvg = 'http://example.com/tvg.xml';
+        expect(playlist.getM3uString()).toEqual(urlTvgTags);
     });
 
 });

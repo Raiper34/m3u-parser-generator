@@ -25,7 +25,8 @@ export class M3uGenerator {
   static generate(playlist: M3uPlaylist): string {
     const pls = playlist.title ? `${M3uDirectives.PLAYLIST}:${playlist.title}` : undefined;
     const medias = playlist.medias.map(item => this.getMedia(item)).join('\n');
-    return [M3uDirectives.EXTM3U, pls, medias].filter(item => item).join('\n');
+    const urlTvg = playlist.urlTvg ? ` url-tvg="${playlist.urlTvg}"` : '';
+    return [M3uDirectives.EXTM3U + urlTvg, pls, medias].filter(item => item).join('\n');
   }
 
   /**

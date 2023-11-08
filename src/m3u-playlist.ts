@@ -26,6 +26,7 @@ export class M3uPlaylist {
    * ```
    */
   title = '';
+  urlTvg?: string = undefined;
   /**
    * M3u media objects
    * @example
