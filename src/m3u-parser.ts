@@ -85,6 +85,10 @@ export class M3uParser {
         playlist.title = trackInformation;
         break;
       }
+      case M3uDirectives.EXTATTRFROMURL: {
+        media.extraAttributesFromUrl = trackInformation;
+        break;
+      }
     }
   }
 

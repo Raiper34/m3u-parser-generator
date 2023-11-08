@@ -1,5 +1,13 @@
 import {M3uAttributes, M3uMedia, M3uParser, M3uPlaylist} from "../src";
-import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes, invalidPlaylist, urlTvgTags} from "./test-m3u";
+import {
+    complex,
+    extGroupDirectiveOrder,
+    emptyAttributes,
+    invalidAttributes,
+    invalidPlaylist,
+    urlTvgTags,
+    playlistWithExtAttrFromUrl,
+} from "./test-m3u";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
@@ -70,6 +78,27 @@ describe('Parse and generate test', () => {
         const playlist = new M3uPlaylist();
         playlist.urlTvg = 'http://example.com/tvg.xml';
         expect(playlist.getM3uString()).toEqual(urlTvgTags);
+    });
+
+    it('should parse extra attributes from url', () => {
+        const playlist = M3uParser.parse(playlistWithExtAttrFromUrl);
+        expect(playlist.medias[0].extraAttributesFromUrl).toEqual('https://example.com/attributes.txt');
+    });
+
+    it('should write extra attributes from url', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        media.extraAttributesFromUrl = 'https://example.com/attributes.txt';
+        const playlist = new M3uPlaylist();
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithExtAttrFromUrl);
     });
 
 });

@@ -7,6 +7,8 @@ export enum M3uDirectives {
   EXTINF = '#EXTINF',
   PLAYLIST = '#PLAYLIST',
   EXTGRP = '#EXTGRP',
+  EXTATTRFROMURL = '#EXTATTRFROMURL',
+  EXTHTTP = '#EXTHTTP',
 }
 
 /**
@@ -78,6 +80,11 @@ export class M3uMedia {
    * Attributes of media. Default value is empty attributes object.
    */
   attributes: M3uAttributes = new M3uAttributes();
+
+  /**
+   * Extra attributes from url
+   */
+  extraAttributesFromUrl?: string = undefined;
 
   /**
    * Constructor

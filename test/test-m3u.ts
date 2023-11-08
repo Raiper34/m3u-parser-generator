@@ -43,5 +43,10 @@ playlist.m3u
 #EXTGRP:
 playlist.m3u`;
 
-
 export const urlTvgTags = `#EXTM3U url-tvg="http://example.com/tvg.xml"`;
+
+export const playlistWithExtAttrFromUrl = `#EXTM3U
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country="CZ" tvg-language="CS" tvg-logo="logo1.png" group-title="Test1" unknown="0",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#EXTATTRFROMURL:https://example.com/attributes.txt
+http://iptv.test1.com/playlist.m3u8`
