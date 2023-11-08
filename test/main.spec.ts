@@ -7,6 +7,7 @@ import {
     invalidPlaylist,
     urlTvgTags,
     playlistWithExtAttrFromUrl,
+    playlistWithExtraHTTPHeaders
 } from "./test-m3u";
 
 describe('Parse and generate test', () => {
@@ -99,6 +100,28 @@ describe('Parse and generate test', () => {
         const playlist = new M3uPlaylist();
         playlist.medias.push(media);
         expect(playlist.getM3uString()).toEqual(playlistWithExtAttrFromUrl);
+    });
+
+    it('should parse extra http headers', () => {
+        const playlist = M3uParser.parse(playlistWithExtraHTTPHeaders);
+        expect(playlist.medias[0].extraHttpHeaders).toEqual(JSON.parse('{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}'));
+    });
+
+    it('should write extra http headers', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        media.extraHttpHeaders = JSON.parse('{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}');
+        const playlist = new M3uPlaylist();
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithExtraHTTPHeaders);
     });
 
 });

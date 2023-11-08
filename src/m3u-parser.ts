@@ -89,6 +89,10 @@ export class M3uParser {
         media.extraAttributesFromUrl = trackInformation;
         break;
       }
+      case M3uDirectives.EXTHTTP: {
+        media.extraHttpHeaders = JSON.parse(trackInformation);
+        break;
+      }
     }
   }
 

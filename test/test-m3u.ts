@@ -50,3 +50,9 @@ export const playlistWithExtAttrFromUrl = `#EXTM3U
 #EXTGRP:Test TV group 1
 #EXTATTRFROMURL:https://example.com/attributes.txt
 http://iptv.test1.com/playlist.m3u8`
+
+export const playlistWithExtraHTTPHeaders = `#EXTM3U
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country="CZ" tvg-language="CS" tvg-logo="logo1.png" group-title="Test1" unknown="0",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}
+http://iptv.test1.com/playlist.m3u8`

@@ -87,6 +87,11 @@ export class M3uMedia {
   extraAttributesFromUrl?: string = undefined;
 
   /**
+   * Extra HTTP headers
+   */
+  extraHttpHeaders?: unknown = undefined;
+
+  /**
    * Constructor
    * @param location - location of stream
    */

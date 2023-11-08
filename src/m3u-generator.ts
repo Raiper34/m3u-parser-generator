@@ -40,7 +40,14 @@ export class M3uGenerator {
     const info = this.shouldAddInfoDirective(media, attributesString) ? `${M3uDirectives.EXTINF}:${media.duration}${attributesString},${media.name}` : null;
     const group = media.group ? `${M3uDirectives.EXTGRP}:${media.group}` : null;
     const extraAttributesFromUrl = media.extraAttributesFromUrl ? `${M3uDirectives.EXTATTRFROMURL}:${media.extraAttributesFromUrl}` : null;
-    return [info, group, extraAttributesFromUrl, media.location].filter(item => item).join('\n');
+    const extraHttpHeaders = media.extraHttpHeaders ? `${M3uDirectives.EXTHTTP}:${JSON.stringify(media.extraHttpHeaders)}` : null;
+    return [
+      info,
+      group,
+      extraAttributesFromUrl,
+      extraHttpHeaders,
+      media.location
+    ].filter(item => item).join('\n');
   }
 
   /**
