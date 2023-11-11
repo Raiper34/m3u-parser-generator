@@ -43,4 +43,24 @@ playlist.m3u
 #EXTGRP:
 playlist.m3u`;
 
+export const urlTvgTags = `#EXTM3U url-tvg="http://example.com/tvg.xml"`;
 
+export const playlistWithExtAttrFromUrl = `#EXTM3U
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country="CZ" tvg-language="CS" tvg-logo="logo1.png" group-title="Test1" unknown="0",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#EXTATTRFROMURL:https://example.com/attributes.txt
+http://iptv.test1.com/playlist.m3u8`
+
+export const playlistWithExtraHTTPHeaders = `#EXTM3U
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country="CZ" tvg-language="CS" tvg-logo="logo1.png" group-title="Test1" unknown="0",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}
+http://iptv.test1.com/playlist.m3u8`
+
+export const playlistWithKodiProps = `#EXTM3U
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country="CZ" tvg-language="CS" tvg-logo="logo1.png" group-title="Test1" unknown="0",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#KODIPROP:inputstream.adaptive.manifest_type=m3u8
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=test
+http://iptv.test1.com/playlist.m3u8`

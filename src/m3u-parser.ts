@@ -85,6 +85,37 @@ export class M3uParser {
         playlist.title = trackInformation;
         break;
       }
+      case M3uDirectives.EXTATTRFROMURL: {
+        media.extraAttributesFromUrl = trackInformation;
+        break;
+      }
+      case M3uDirectives.EXTHTTP: {
+        media.extraHttpHeaders = JSON.parse(trackInformation);
+        break;
+      }
+      case M3uDirectives.KODIPROP: {
+        const [key, value] = trackInformation.split('=');
+
+        if(!media.kodiProps) {
+          media.kodiProps = new Map<string, string>();
+        }
+
+        media.kodiProps.set(key, value);
+        break;
+      }
+    }
+  }
+
+  /**
+   * Process directive method detects directive on line and call proper method to another processing
+   * @param item - actual line of m3u playlist string e.g. '#EXTINF:-1 tvg-id="" group-title="",Tv Name'
+   * @param playlist - m3u playlist object processed until now
+   * @private
+   */
+  private static processUrlTvg(item: string, playlist: M3uPlaylist): void {
+    const urlTvgValue = item.split('url-tvg="')[1];
+    if (urlTvgValue) {
+      playlist.urlTvg = urlTvgValue.split('"')[0];
     }
   }
 
@@ -98,6 +129,9 @@ export class M3uParser {
   private static getPlaylist(lines: string[], ignoreErrors: boolean): M3uPlaylist {
     const playlist = new M3uPlaylist();
     let media = new M3uMedia('');
+
+    this.processUrlTvg(lines[0], playlist);
+
     lines.forEach(item => {
       if (this.isDirective(item)) {
         this.processDirective(item, playlist, media, ignoreErrors);

@@ -7,6 +7,9 @@ export enum M3uDirectives {
   EXTINF = '#EXTINF',
   PLAYLIST = '#PLAYLIST',
   EXTGRP = '#EXTGRP',
+  EXTATTRFROMURL = '#EXTATTRFROMURL',
+  EXTHTTP = '#EXTHTTP',
+  KODIPROP = '#KODIPROP'
 }
 
 /**
@@ -26,6 +29,7 @@ export class M3uPlaylist {
    * ```
    */
   title = '';
+  urlTvg?: string = undefined;
   /**
    * M3u media objects
    * @example
@@ -77,6 +81,21 @@ export class M3uMedia {
    * Attributes of media. Default value is empty attributes object.
    */
   attributes: M3uAttributes = new M3uAttributes();
+
+  /**
+   * Extra attributes from url
+   */
+  extraAttributesFromUrl?: string = undefined;
+
+  /**
+   * Extra HTTP headers
+   */
+  extraHttpHeaders?: unknown = undefined;
+
+  /**
+   * Kodi props
+   */
+  kodiProps?: Map<string, string> = new Map<string, string>();
 
   /**
    * Constructor

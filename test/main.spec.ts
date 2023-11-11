@@ -1,5 +1,15 @@
 import {M3uAttributes, M3uMedia, M3uParser, M3uPlaylist} from "../src";
-import {complex, extGroupDirectiveOrder, emptyAttributes, invalidAttributes, invalidPlaylist} from "./test-m3u";
+import {
+    complex,
+    extGroupDirectiveOrder,
+    emptyAttributes,
+    invalidAttributes,
+    invalidPlaylist,
+    urlTvgTags,
+    playlistWithExtAttrFromUrl,
+    playlistWithExtraHTTPHeaders,
+    playlistWithKodiProps
+} from "./test-m3u";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
@@ -59,6 +69,90 @@ describe('Parse and generate test', () => {
         expectedPlaylist.medias = [media1, media2]
 
         expect(M3uParser.parse(invalidPlaylist, true)).toEqual(expectedPlaylist);
+    });
+
+    it('should parse url-tvg attribute', () => {
+        const playlist = M3uParser.parse(urlTvgTags);
+        expect(playlist.urlTvg).toEqual('http://example.com/tvg.xml');
+    });
+
+    it('should write url-tvg attribute', () => {
+        const playlist = new M3uPlaylist();
+        playlist.urlTvg = 'http://example.com/tvg.xml';
+        expect(playlist.getM3uString()).toEqual(urlTvgTags);
+    });
+
+    it('should parse extra attributes from url', () => {
+        const playlist = M3uParser.parse(playlistWithExtAttrFromUrl);
+        expect(playlist.medias[0].extraAttributesFromUrl).toEqual('https://example.com/attributes.txt');
+    });
+
+    it('should write extra attributes from url', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        media.extraAttributesFromUrl = 'https://example.com/attributes.txt';
+        const playlist = new M3uPlaylist();
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithExtAttrFromUrl);
+    });
+
+    it('should parse extra http headers', () => {
+        const playlist = M3uParser.parse(playlistWithExtraHTTPHeaders);
+        expect(playlist.medias[0].extraHttpHeaders).toEqual(JSON.parse('{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}'));
+    });
+
+    it('should write extra http headers', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        media.extraHttpHeaders = JSON.parse('{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}');
+        const playlist = new M3uPlaylist();
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithExtraHTTPHeaders);
+    });
+
+    it('should parse kodi props', () => {
+        const playlist = M3uParser.parse(playlistWithKodiProps);
+        expect(playlist.medias[0].kodiProps).toEqual(new Map([
+            [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
+            [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
+            [ 'inputstream.adaptive.license_key', 'test' ]
+        ]));
+    });
+
+    it('should write kodi props', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        media.kodiProps = new Map([
+            [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
+            [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
+            [ 'inputstream.adaptive.license_key', 'test' ]
+        ]);
+        const playlist = new M3uPlaylist();
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithKodiProps);
     });
 
 });
