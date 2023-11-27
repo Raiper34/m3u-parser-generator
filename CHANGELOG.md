@@ -1,3 +1,6 @@
+#### 1.5.0 (2023-11-27)
+* enhance M3U Playlist with extra attributes (#9) (url-tvg attribute, extra attributes from URL, extra HTTP headers, Kodi properties)
+
 #### 1.4.1 (2023-10-21)
 * fix ignoreErrors to be able also parse playlists with errors
 
