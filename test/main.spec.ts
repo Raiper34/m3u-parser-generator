@@ -3,7 +3,6 @@ import {
     complex,
     extGroupDirectiveOrder,
     emptyAttributes,
-    invalidAttributes,
     invalidPlaylist,
     urlTvgTags,
     playlistWithExtAttrFromUrl,
@@ -48,13 +47,10 @@ describe('Parse and generate test', () => {
         expect(() => M3uParser.parse('', true)).not.toThrow(new Error(`m3uString can't be null!`));
     });
 
-    it('should raise exception when parsing invalid attribute string', () => {
-        expect(() => M3uParser.parse(invalidAttributes)).toThrow(new Error(`Attribute value can't be null!`));
-    });
-
     it('should parse with invalid attributes', () => {
         const attr = new M3uAttributes();
         attr["tvg-id"] = 'Test tv 1';
+        attr["tvg-language"] = ' CS';
         const media1 = new M3uMedia('playlist.m3u');
         media1.name = 'Test tv 1 [CZ]';
         media1.group = 'Test TV group 1';
