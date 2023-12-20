@@ -1,5 +1,8 @@
+#### 1.6.0 (2023-12-20)
+* change attributes parser to be able to handle strings starting with space (attribute=" value"), also skip invalid attributes by default 
+
 #### 1.5.0 (2023-11-27)
-* enhance M3U Playlist with extra attributes (#9) (url-tvg attribute, extra attributes from URL, extra HTTP headers, Kodi properties)
+* enhance M3U Playlist with extra attributes (url-tvg attribute, extra attributes from URL, extra HTTP headers, Kodi properties)
 
 #### 1.4.1 (2023-10-21)
 * fix ignoreErrors to be able also parse playlists with errors
