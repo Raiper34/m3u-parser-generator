@@ -56,3 +56,15 @@ export const playlistWithKodiProps = `#EXTM3U
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=test
 http://iptv.test1.com/playlist.m3u8`
+
+export const playlistWithExtraProps = `#EXTM3U url-tvg="http://example.com/tvg.xml" url-logo="http://path/to/icons/root/"
+#EXTINF:-1 tvg-id="Test tv 1" tvg-country="CZ" tvg-language="CS" tvg-logo="logo1.png" group-title="Test1" unknown="0",Test tv 1 [CZ]
+#EXTGRP:Test TV group 1
+#EXTBYT:123
+#EXTIMG:cover.jpg
+#EXTALB:test album
+#EXTART:test artist
+#EXTGENRE:test genre
+http://iptv.test1.com/playlist.m3u8`
+
+export const invalidExtM3uAttributes = `#EXTM3U foo="bar`;

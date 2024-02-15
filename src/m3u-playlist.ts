@@ -7,6 +7,11 @@ export enum M3uDirectives {
   EXTINF = '#EXTINF',
   PLAYLIST = '#PLAYLIST',
   EXTGRP = '#EXTGRP',
+  EXTBYT = '#EXTBYT',
+  EXTIMG = '#EXTIMG',
+  EXTALB = '#EXTALB',
+  EXTART = '#EXTART',
+  EXTGENRE = '#EXTGENRE',
   EXTATTRFROMURL = '#EXTATTRFROMURL',
   EXTHTTP = '#EXTHTTP',
   KODIPROP = '#KODIPROP'
@@ -29,7 +34,31 @@ export class M3uPlaylist {
    * ```
    */
   title = '';
-  urlTvg?: string = undefined;
+
+
+  /**
+   * Get url-tvg url
+   * @returns url-tvg url
+   * @deprecated The method should not be used, use playlist.attributes['url-tvg'] instead
+   */
+  get urlTvg(): string | undefined {
+    return this.attributes['url-tvg'];
+  }
+
+  /**
+   * Set url-tvg url
+   * @param urlTvg - url-tvg url
+   * @deprecated The method should not be used, use playlist.attributes['url-tvg'] instead
+   */
+  set urlTvg(urlTvg: string | undefined) {
+    this.attributes = { ...this.attributes, 'url-tvg': urlTvg }
+  }
+
+  /**
+   * Attributes of of the EXTM3U tag. Default value is empty attributes object.
+   */
+  attributes: M3uAttributes = new M3uAttributes();
+
   /**
    * M3u media objects
    * @example
@@ -96,6 +125,31 @@ export class M3uMedia {
    * Kodi props
    */
   kodiProps?: Map<string, string> = new Map<string, string>();
+
+  /**
+   * Size of media in bytes.
+   */
+  bytes?: number = undefined;
+
+  /**
+   * image (e.g. cover) URL
+   */
+  image?: string = undefined;
+
+  /**
+   * album
+   */
+  album?: string = undefined;
+
+  /**
+   * artist
+   */
+  artist?: string = undefined;
+
+  /**
+   * genre
+   */
+  genre?: string = undefined;
 
   /**
    * Constructor
