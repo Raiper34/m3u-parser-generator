@@ -25,8 +25,8 @@ export class M3uGenerator {
   static generate(playlist: M3uPlaylist): string {
     const pls = playlist.title ? `${M3uDirectives.PLAYLIST}:${playlist.title}` : undefined;
     const medias = playlist.medias.map(item => this.getMedia(item)).join('\n');
-    const urlTvg = playlist.urlTvg ? ` url-tvg="${playlist.urlTvg}"` : '';
-    return [M3uDirectives.EXTM3U + urlTvg, pls, medias].filter(item => item).join('\n');
+    const attributesString = this.getAttributes(playlist.attributes);
+    return [M3uDirectives.EXTM3U + attributesString, pls, medias].filter(item => item).join('\n');
   }
 
   /**
@@ -39,12 +39,23 @@ export class M3uGenerator {
     const attributesString = this.getAttributes(media.attributes);
     const info = this.shouldAddInfoDirective(media, attributesString) ? `${M3uDirectives.EXTINF}:${media.duration}${attributesString},${media.name}` : null;
     const group = media.group ? `${M3uDirectives.EXTGRP}:${media.group}` : null;
+    const bytes = media.bytes ? `${M3uDirectives.EXTBYT}:${media.bytes}` : null;
+    const image = media.image ? `${M3uDirectives.EXTIMG}:${media.image}` : null;
+    const album = media.album ? `${M3uDirectives.EXTALB}:${media.album}` : null;
+    const artist = media.artist ? `${M3uDirectives.EXTART}:${media.artist}` : null;
+    const genre = media.genre ? `${M3uDirectives.EXTGENRE}:${media.genre}` : null;
     const extraAttributesFromUrl = media.extraAttributesFromUrl ? `${M3uDirectives.EXTATTRFROMURL}:${media.extraAttributesFromUrl}` : null;
     const extraHttpHeaders = media.extraHttpHeaders ? `${M3uDirectives.EXTHTTP}:${JSON.stringify(media.extraHttpHeaders)}` : null;
     const kodiProps = media.kodiProps ? [...media.kodiProps].map(([key, value]) => `${M3uDirectives.KODIPROP}:${key}=${value}`).join('\n') : null;
+
     return [
       info,
       group,
+      bytes,
+      image,
+      album,
+      artist,
+      genre,
       extraAttributesFromUrl,
       extraHttpHeaders,
       kodiProps,

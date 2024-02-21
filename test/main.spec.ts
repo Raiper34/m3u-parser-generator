@@ -7,7 +7,9 @@ import {
     urlTvgTags,
     playlistWithExtAttrFromUrl,
     playlistWithExtraHTTPHeaders,
-    playlistWithKodiProps
+    playlistWithKodiProps,
+    playlistWithExtraProps,
+    invalidExtM3uAttributes
 } from "./test-m3u";
 
 describe('Parse and generate test', () => {
@@ -151,4 +153,43 @@ describe('Parse and generate test', () => {
         expect(playlist.getM3uString()).toEqual(playlistWithKodiProps);
     });
 
+    it('should parse extra props/attributes', () => {
+        const playlist = M3uParser.parse(playlistWithExtraProps);
+        expect(playlist.urlTvg).toEqual('http://example.com/tvg.xml');
+        expect(playlist.attributes['url-tvg']).toEqual('http://example.com/tvg.xml');
+        expect(playlist.attributes['url-logo']).toEqual('http://path/to/icons/root/');
+        expect(playlist.medias[0].group).toEqual("Test TV group 1");
+        expect(playlist.medias[0].bytes).toEqual(123);
+        expect(playlist.medias[0].image).toEqual("cover.jpg");
+        expect(playlist.medias[0].album).toEqual("test album");
+        expect(playlist.medias[0].artist).toEqual("test artist");
+        expect(playlist.medias[0].genre).toEqual("test genre");
+    });
+
+    it('should write extra props/attributes', () => {
+        const media = new M3uMedia('http://iptv.test1.com/playlist.m3u8');
+        media.name = 'Test tv 1 [CZ]';
+        media.group = 'Test TV group 1';
+        media.bytes = 123;
+        media.image = "cover.jpg";
+        media.album = "test album";
+        media.artist = "test artist";
+        media.genre = "test genre";
+        media.attributes["tvg-id"] = 'Test tv 1';
+        media.attributes["tvg-country"] = 'CZ';
+        media.attributes["tvg-language"] = 'CS';
+        media.attributes["tvg-logo"] = 'logo1.png';
+        media.attributes["group-title"] = 'Test1';
+        media.attributes["unknown"] = '0';
+        const playlist = new M3uPlaylist();
+        playlist.attributes['url-tvg'] = 'http://example.com/tvg.xml'
+        playlist.attributes['url-logo'] = 'http://path/to/icons/root/'
+        playlist.medias.push(media);
+        expect(playlist.getM3uString()).toEqual(playlistWithExtraProps);
+    });
+
+    it('should parse invalid attributes', () => {
+        const playlist = M3uParser.parse(invalidExtM3uAttributes);
+        expect(playlist.attributes).toEqual(new M3uAttributes());
+    });
 });

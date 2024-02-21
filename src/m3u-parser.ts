@@ -69,6 +69,26 @@ export class M3uParser {
         media.group = trackInformation;
         break;
       }
+      case M3uDirectives.EXTBYT: {
+        media.bytes = Number(trackInformation);
+        break;
+      }
+      case M3uDirectives.EXTIMG: {
+        media.image = trackInformation;
+        break;
+      }
+      case M3uDirectives.EXTALB: {
+        media.album = trackInformation;
+        break;
+      }
+      case M3uDirectives.EXTART: {
+        media.artist = trackInformation;
+        break;
+      }
+      case M3uDirectives.EXTGENRE: {
+        media.genre = trackInformation;
+        break;
+      }
       case M3uDirectives.PLAYLIST: {
         playlist.title = trackInformation;
         break;
@@ -95,15 +115,18 @@ export class M3uParser {
   }
 
   /**
-   * Process directive method detects directive on line and call proper method to another processing
-   * @param item - actual line of m3u playlist string e.g. '#EXTINF:-1 tvg-id="" group-title="",Tv Name'
+   * Process attributes in #EXTM3U line
+   * @param item - first line of m3u playlist string e.g. '#EXTM3U url-tvg="http://example.com/tvg.xml"'
    * @param playlist - m3u playlist object processed until now
    * @private
    */
-  private static processUrlTvg(item: string, playlist: M3uPlaylist): void {
-    const urlTvgValue = item.split('url-tvg="')[1];
-    if (urlTvgValue) {
-      playlist.urlTvg = urlTvgValue.split('"')[0];
+  private static processExtM3uAttributes(item: string, playlist: M3uPlaylist): void {
+    if(item.startsWith(M3uDirectives.EXTM3U)) {
+      const firstSpaceIndex = item.indexOf(' ');
+      if(firstSpaceIndex > 0) {
+        const attributes = item.substring(firstSpaceIndex + 1);
+        playlist.attributes = this.getAttributes(attributes);
+      }
     }
   }
 
@@ -117,7 +140,7 @@ export class M3uParser {
     const playlist = new M3uPlaylist();
     let media = new M3uMedia('');
 
-    this.processUrlTvg(lines[0], playlist);
+    this.processExtM3uAttributes(lines[0], playlist);
 
     lines.forEach(item => {
       if (this.isDirective(item)) {
