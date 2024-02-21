@@ -168,6 +168,10 @@ export class M3uMedia {
  */
 export class M3uAttributes {
   /**
+   * url-tvg attribute, widely used for EPG
+   */
+  'url-tvg'?: string;
+  /**
    * tvg-id attribute, widely used
    */
   'tvg-id'?: string;
