@@ -1,3 +1,6 @@
+#### 1.7.0 (2024-02-23)
+* added support for `#EXTBYT`/`EXTIMG`/`EXTALB`/`EXTART`/`EXTGENRE` directives and `#EXTM3U` attributes
+
 #### 1.6.0 (2023-12-20)
 * change attributes parser to be able to handle strings starting with space (attribute=" value"), also skip invalid attributes by default 
 
