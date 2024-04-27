@@ -128,7 +128,7 @@ describe('Parse and generate test', () => {
         expect(playlist.medias[0].kodiProps).toEqual(new Map([
             [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
             [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
-            [ 'inputstream.adaptive.license_key', 'test' ]
+            [ 'inputstream.adaptive.license_key', 'https://example.com/license.php?id=example' ]
         ]));
     });
 
@@ -146,7 +146,7 @@ describe('Parse and generate test', () => {
         media.kodiProps = new Map([
             [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
             [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
-            [ 'inputstream.adaptive.license_key', 'test' ]
+            [ 'inputstream.adaptive.license_key', 'https://example.com/license.php?id=example' ]
         ]);
         const playlist = new M3uPlaylist();
         playlist.medias.push(media);
