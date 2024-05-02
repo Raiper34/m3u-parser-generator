@@ -102,7 +102,8 @@ export class M3uParser {
         break;
       }
       case M3uDirectives.KODIPROP: {
-        const [key, value] = trackInformation.split('=');
+        const [key, ...valueParts] = trackInformation.split('=');
+        const value = valueParts.join('='); // in case value contains '=', ie. '#KODIPROP:inputstream.adaptive.license_key=https://example.com/license.php?id=example'
 
         if(!media.kodiProps) {
           media.kodiProps = new Map<string, string>();

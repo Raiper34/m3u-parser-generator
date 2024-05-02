@@ -54,7 +54,7 @@ export const playlistWithKodiProps = `#EXTM3U
 #EXTGRP:Test TV group 1
 #KODIPROP:inputstream.adaptive.manifest_type=m3u8
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=test
+#KODIPROP:inputstream.adaptive.license_key=https://example.com/license.php?id=example
 http://iptv.test1.com/playlist.m3u8`
 
 export const playlistWithExtraProps = `#EXTM3U url-tvg="http://example.com/tvg.xml" url-logo="http://path/to/icons/root/"
