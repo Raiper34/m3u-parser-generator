@@ -1,3 +1,6 @@
+#### 1.7.1 (2024-05-07)
+* fix `KODIPROP` with multiple `=` characters
+
 #### 1.7.0 (2024-02-23)
 * added support for `#EXTBYT`/`EXTIMG`/`EXTALB`/`EXTART`/`EXTGENRE` directives and `#EXTM3U` attributes
 
