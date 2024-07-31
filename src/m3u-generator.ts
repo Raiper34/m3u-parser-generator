@@ -1,4 +1,5 @@
 import {
+  M3uCustomData,
   M3uDirectives,
   M3uMedia,
   M3uPlaylist,
@@ -24,9 +25,10 @@ export class M3uGenerator {
    */
   static generate(playlist: M3uPlaylist): string {
     const pls = playlist.title ? `${M3uDirectives.PLAYLIST}:${playlist.title}` : undefined;
+    const customData = this.getCustomDataDirective(playlist.customData);
     const medias = playlist.medias.map(item => this.getMedia(item)).join('\n');
     const attributesString = this.getAttributes(playlist.attributes);
-    return [M3uDirectives.EXTM3U + attributesString, pls, medias].filter(item => item).join('\n');
+    return [M3uDirectives.EXTM3U + attributesString, pls, customData, medias].filter(item => item).join('\n');
   }
 
   /**
@@ -47,6 +49,7 @@ export class M3uGenerator {
     const extraAttributesFromUrl = media.extraAttributesFromUrl ? `${M3uDirectives.EXTATTRFROMURL}:${media.extraAttributesFromUrl}` : null;
     const extraHttpHeaders = media.extraHttpHeaders ? `${M3uDirectives.EXTHTTP}:${JSON.stringify(media.extraHttpHeaders)}` : null;
     const kodiProps = media.kodiProps ? [...media.kodiProps].map(([key, value]) => `${M3uDirectives.KODIPROP}:${key}=${value}`).join('\n') : null;
+    const customData = this.getCustomDataDirective(media.customData);
 
     return [
       info,
@@ -59,8 +62,18 @@ export class M3uGenerator {
       extraAttributesFromUrl,
       extraHttpHeaders,
       kodiProps,
+      customData,
       media.location
     ].filter(item => item).join('\n');
+  }
+
+  /**
+   * Get generated string of custom directives for both, playlist and media
+   * @param customData - custom data object, that represents unknown directives
+   * @private
+   */
+  private static getCustomDataDirective(customData: M3uCustomData[]): string {
+    return customData.map(data => `${data.directive}:${data.value}`).join('\n');
   }
 
   /**

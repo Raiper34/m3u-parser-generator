@@ -18,6 +18,22 @@ export enum M3uDirectives {
 }
 
 /**
+ * Custom data, that represents unknown directives, that can be parsed also, when mapping is presented
+ */
+export interface M3uCustomData {
+  /**
+   * Directive name with '#' symbol at the start
+   * e.g. #EXT-CUSTOM
+   */
+  directive: string;
+  /**
+   * Value or parameters of directive
+   * in case of #EXT-CUSTOM:Something , the 'Something' string is the value
+   */
+  value: string;
+}
+
+/**
  * M3u playlist object
  */
 export class M3uPlaylist {
@@ -69,6 +85,11 @@ export class M3uPlaylist {
    * ```
    */
   medias: M3uMedia[] = [];
+
+  /**
+   * Unknown directives, that belong to the whole playlist
+   */
+  customData: M3uCustomData[] = [];
 
   /**
    * Get m3u string method to get m3u playlist string of current playlist object
@@ -150,6 +171,11 @@ export class M3uMedia {
    * genre
    */
   genre?: string = undefined;
+
+  /**
+   * Unknown directives, that belong to the specific media
+   */
+  customData: M3uCustomData[] = [];
 
   /**
    * Constructor

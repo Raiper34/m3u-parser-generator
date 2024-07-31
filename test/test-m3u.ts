@@ -68,3 +68,10 @@ export const playlistWithExtraProps = `#EXTM3U url-tvg="http://example.com/tvg.x
 http://iptv.test1.com/playlist.m3u8`
 
 export const invalidExtM3uAttributes = `#EXTM3U foo="bar`;
+
+export const playlistWithCustomDirectives = `#EXTM3U
+#EXTCUSTOMPLAYLIST:playlist
+#EXTCUSTOMMEDIA:MEDIA1
+http://iptv.test1.com/playlist.m3u8
+#EXTCUSTOMMEDIA:MEDIA2
+http://iptv.test1.com/playlist2.m3u8`

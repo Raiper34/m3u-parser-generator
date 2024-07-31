@@ -9,8 +9,9 @@ import {
     playlistWithExtraHTTPHeaders,
     playlistWithKodiProps,
     playlistWithExtraProps,
-    invalidExtM3uAttributes
+    invalidExtM3uAttributes, playlistWithCustomDirectives
 } from "./test-m3u";
+import {M3uCustomDataMapping} from "../src/m3u-parser";
 
 describe('Parse and generate test', () => {
     it('should be same as original after parse and generate', () => {
@@ -46,7 +47,7 @@ describe('Parse and generate test', () => {
     });
 
     it('should NOT raise exception when parsing invalid m3u string with ignoreErrors argument', () => {
-        expect(() => M3uParser.parse('', true)).not.toThrow(new Error(`m3uString can't be null!`));
+        expect(() => M3uParser.parse('', {ignoreErrors: true})).not.toThrow(new Error(`m3uString can't be null!`));
     });
 
     it('should parse with invalid attributes', () => {
@@ -66,7 +67,7 @@ describe('Parse and generate test', () => {
         const expectedPlaylist = new M3uPlaylist();
         expectedPlaylist.medias = [media1, media2]
 
-        expect(M3uParser.parse(invalidPlaylist, true)).toEqual(expectedPlaylist);
+        expect(M3uParser.parse(invalidPlaylist, {ignoreErrors: true})).toEqual(expectedPlaylist);
     });
 
     it('should parse url-tvg attribute', () => {
@@ -192,4 +193,12 @@ describe('Parse and generate test', () => {
         const playlist = M3uParser.parse(invalidExtM3uAttributes);
         expect(playlist.attributes).toEqual(new M3uAttributes());
     });
+
+    it('should parse and generate with custom directives', () => {
+        const customDataMapping: M3uCustomDataMapping = {
+            '#EXTCUSTOMPLAYLIST': false,
+            '#EXTCUSTOMMEDIA': true,
+        }
+        expect(M3uParser.parse(playlistWithCustomDirectives, {customDataMapping}).getM3uString()).toEqual(playlistWithCustomDirectives);
+    })
 });
