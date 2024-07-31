@@ -1,20 +1,30 @@
 [![npm version](https://badge.fury.io/js/m3u-parser-generator.svg)](https://badge.fury.io/js/m3u-parser-generator)
-[![npm](https://img.shields.io/npm/dt/m3u-parser-generator)](https://badge.fury.io/js/m3u-parser-generator)
-[![GitHub Repo stars](https://img.shields.io/github/stars/raiper34/m3u-parser-generator)](https://github.com/Raiper34/m3u-parser-generator)
-[![CircleCI](https://circleci.com/gh/Raiper34/m3u-parser-generator.svg?style=shield)](https://circleci.com/gh/Raiper34/m3u-parser-generator)
-[![Coverage Status](https://coveralls.io/repos/github/Raiper34/m3u-parser-generator/badge.svg?branch=main)](https://coveralls.io/github/Raiper34/m3u-parser-generator?branch=main)
+[![docs](https://badgen.net/badge/docs/online/orange)](https://m3u-parser-generator.netlify.app)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/m3u-parser-generator)
 ![NPM](https://img.shields.io/npm/l/m3u-parser-generator)
-[![docs](https://badgen.net/badge/docs/online/orange)](https://m3u-parser-generator.netlify.app)
+[![CircleCI](https://circleci.com/gh/Raiper34/m3u-parser-generator.svg?style=shield)](https://circleci.com/gh/Raiper34/m3u-parser-generator)
+[![Coverage Status](https://coveralls.io/repos/github/Raiper34/m3u-parser-generator/badge.svg?branch=main)](https://coveralls.io/github/Raiper34/m3u-parser-generator?branch=main)
+[![npm](https://img.shields.io/npm/dt/m3u-parser-generator)](https://badge.fury.io/js/m3u-parser-generator)
 [![](https://data.jsdelivr.com/v1/package/npm/m3u-parser-generator/badge?style=rounded)](https://www.jsdelivr.com/package/npm/m3u-parser-generator)
+[![GitHub Repo stars](https://img.shields.io/github/stars/raiper34/m3u-parser-generator)](https://github.com/Raiper34/m3u-parser-generator)
 
 # M3U Parser Generator
 Library to parse and generate [m3u or m3u8 IPTV playlist files](https://en.wikipedia.org/wiki/M3U). 
 
-# Instalation
+### Content
+- [🚀 Instalation](#-instalation)
+- [📚 Documentation](#-documentation)
+- [💻 Usage](#-usage)
+    - [🌐 Usage in browser](#usage-in-browser)
+- [📖 License](#-license)
+
+# 🚀 Instalation
 `npm install m3u-parser-generator --save`
 
-# Usage
+# 📚 Documentation
+[Online documentation](https://m3u-parser-generator.netlify.app/)
+
+# 💻 Usage
 You can parse your loaded m3u string:
 ```javascript
 import {M3uParser} from 'm3u-parser-generator';
@@ -100,7 +110,7 @@ you get
 http://my-stream-ulr.com/playlist.m3u8
 ```
 
-# Usage in browser
+# 🌐 Usage in browser
 You can also use this library in the browser without compiling using jsDelivr.
 Import script into HTML file, and you can access classes through the global `m3uParserGenerator` object.
 ```html
@@ -114,5 +124,5 @@ Import script into HTML file, and you can access classes through the global `m3u
 </script>
 ```
 
-# License
+# 📖 License
 MIT
