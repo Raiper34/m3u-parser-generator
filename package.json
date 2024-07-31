@@ -1,6 +1,6 @@
 {
   "name": "m3u-parser-generator",
-  "version": "1.7.2",
+  "version": "2.0.0",
   "description": "Library to parse and generate m3u or m3u8 IPTV playlist files",
   "keywords": [
     "m3u",
@@ -22,7 +22,7 @@
     "lint:fix": "npx eslint ./src --fix",
     "docs": "npx typedoc src/index.ts",
     "deploy": "npm run docs && netlify deploy --dir=docs --prod",
-    "publish": "npm run build && npm publish"
+    "release": "npm run build && npm publish"
   },
   "author": "Raiper34",
   "license": "MIT",

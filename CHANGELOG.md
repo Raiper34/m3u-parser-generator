@@ -1,3 +1,6 @@
+#### 2.0.0 (2024-07-31)
+* added ability to configure to parse custom or unknown directives
+
 #### 1.7.2 (2024-05-08)
 * fix `KODIPROP` with multiple `=` characters
 
