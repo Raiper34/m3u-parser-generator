@@ -22,7 +22,8 @@
     "lint:fix": "npm run lint -- --fix",
     "docs": "typedoc src/index.ts",
     "deploy": "npm run docs && netlify deploy --dir=docs --prod",
-    "release": "npm run build && npm publish"
+    "release": "npm run build && npm publish",
+    "commit": "cz"
   },
   "author": "Raiper34",
   "license": "MIT",
@@ -31,7 +32,9 @@
     "@types/eslint__js": "^8.42.3",
     "@types/jasmine": "^3.6.6",
     "browserify": "^17.0.1",
+    "commitizen": "^4.3.1",
     "coveralls": "^3.1.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.13.0",
     "jasmine": "^3.6.4",
     "jasmine-ts": "^0.4.0",
@@ -42,5 +45,10 @@
     "typescript": "^5.6.0",
     "typescript-eslint": "^8.10.0",
     "uglify-js": "^3.19.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
