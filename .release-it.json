@@ -8,7 +8,7 @@
     "release": true
   },
   "npm": {
-    "publish": true,
+    "publish": true
   },
   "hooks": {
     "before:init": ["npm run lint", "npm run test"],
