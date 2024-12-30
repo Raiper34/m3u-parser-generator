@@ -1,3 +1,13 @@
+### Changelog
+
+All notable changes to this project will be documented in this file. Dates are displayed in UTC.
+
+#### [3.0.0](https://github.com/Raiper34/m3u-parser-generator/compare/2.0.0...3.0.0)
+
+- build(node): update node to v22, typescript to v5 and all possible dependencies [`b60d4fa`](https://github.com/Raiper34/m3u-parser-generator/commit/b60d4fa4096ceb80d8dd0fb2ea4ebd10aece0859)
+- docs(readme): improve readme.md [`8c05961`](https://github.com/Raiper34/m3u-parser-generator/commit/8c05961e5e74648d1fd088bd1910841a22dc0324)
+- docs(readme): unify badges [`191ae57`](https://github.com/Raiper34/m3u-parser-generator/commit/191ae571061359ebdb4163f2f365d1877208fd48)
+
 <!-- auto-changelog-above -->
 
 #### 2.0.0 (2024-07-31)
