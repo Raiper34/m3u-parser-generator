@@ -1,3 +1,5 @@
+<!-- auto-changelog-above -->
+
 #### 2.0.0 (2024-07-31)
 * added ability to configure to parse custom or unknown directives
 
