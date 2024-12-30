@@ -22,7 +22,8 @@
     "lint:fix": "npm run lint -- --fix",
     "docs": "typedoc src/index.ts",
     "deploy": "npm run docs && netlify deploy --dir=docs --prod",
-    "release": "npm run build && npm publish",
+    "release": "release-it",
+    "changelog": "auto-changelog -p",
     "commit": "cz"
   },
   "author": "Raiper34",
