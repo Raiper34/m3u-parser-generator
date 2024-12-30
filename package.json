@@ -24,7 +24,8 @@
     "deploy": "npm run docs && netlify deploy --dir=docs --prod",
     "release": "release-it",
     "changelog": "auto-changelog -p",
-    "commit": "cz"
+    "commit": "cz",
+    "prepare": "husky"
   },
   "author": "Raiper34",
   "license": "MIT",
@@ -38,6 +39,7 @@
     "coveralls": "^3.1.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.13.0",
+    "husky": "^9.1.7",
     "jasmine": "^3.6.4",
     "jasmine-ts": "^0.4.0",
     "netlify-cli": "^17.37.1",
