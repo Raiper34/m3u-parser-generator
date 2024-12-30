@@ -5,6 +5,8 @@
 [![CircleCI](https://circleci.com/gh/Raiper34/m3u-parser-generator.svg?style=shield)](https://circleci.com/gh/Raiper34/m3u-parser-generator)
 [![Coverage Status](https://coveralls.io/repos/github/Raiper34/m3u-parser-generator/badge.svg?branch=main)](https://coveralls.io/github/Raiper34/m3u-parser-generator?branch=main)
 [![npm](https://img.shields.io/npm/dt/m3u-parser-generator)](https://badge.fury.io/js/m3u-parser-generator)
+[![npm](https://img.shields.io/npm/dm/m3u-parser-generator)](https://badge.fury.io/js/m3u-parser-generator)
+[![npm](https://img.shields.io/npm/dw/m3u-parser-generator)](https://badge.fury.io/js/m3u-parser-generator)
 [![](https://data.jsdelivr.com/v1/package/npm/m3u-parser-generator/badge?style=rounded)](https://www.jsdelivr.com/package/npm/m3u-parser-generator)
 [![GitHub Repo stars](https://img.shields.io/github/stars/raiper34/m3u-parser-generator)](https://github.com/Raiper34/m3u-parser-generator)
 
