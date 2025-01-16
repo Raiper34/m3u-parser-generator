@@ -16,7 +16,8 @@
   "scripts": {
     "build": "npx tsc && browserify dist/index.js -o dist/browser-bundle.js -s m3uParserGenerator && uglifyjs dist/browser-bundle.js -o dist/browser-bundle.min.js",
     "start": "npm run build && node dist/main.js",
-    "test": "nyc -r lcov jasmine-ts --config=jasmine.json",
+    "test": "vitest run --coverage",
+    "test:dev": "vitest",
     "test:ci": "npm run test && cat ./coverage/lcov.info | coveralls",
     "lint": "eslint ./src",
     "lint:fix": "npm run lint -- --fix",
@@ -32,7 +33,7 @@
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/eslint__js": "^8.42.3",
-    "@types/jasmine": "^3.6.6",
+    "@vitest/coverage-v8": "^3.0.1",
     "auto-changelog": "^2.5.0",
     "browserify": "^17.0.1",
     "commitizen": "^4.3.1",
@@ -40,15 +41,12 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.13.0",
     "husky": "^9.1.7",
-    "jasmine": "^3.6.4",
-    "jasmine-ts": "^0.4.0",
     "netlify-cli": "^17.37.1",
-    "nyc": "^17.1.0",
     "release-it": "^17.11.0",
-    "ts-node": "^10.9.2",
     "typedoc": "^0.26.10",
     "typescript": "^5.6.0",
     "typescript-eslint": "^8.10.0",
-    "uglify-js": "^3.19.3"
+    "uglify-js": "^3.19.3",
+    "vitest": "^3.0.1"
   }
 }

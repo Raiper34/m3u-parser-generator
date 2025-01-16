@@ -1,3 +1,4 @@
+import {describe, expect, it} from 'vitest'
 import {M3uAttributes, M3uMedia, M3uParser, M3uPlaylist} from "../src";
 import {
     complex,
