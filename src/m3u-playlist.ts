@@ -145,7 +145,7 @@ export class M3uMedia {
   /**
    * Kodi props
    */
-  kodiProps?: Map<string, string> = new Map<string, string>();
+  kodiProps?: Map<string, string>;
 
   /**
    * Size of media in bytes.
