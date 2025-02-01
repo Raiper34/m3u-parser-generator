@@ -1,4 +1,4 @@
-import {describe, expect, it} from 'vitest'
+import {beforeEach, describe, expect, it} from 'vitest'
 import {M3uAttributes, M3uMedia, M3uParser, M3uPlaylist} from "../src";
 import {
     complex,
@@ -12,23 +12,29 @@ import {
     playlistWithExtraProps,
     invalidExtM3uAttributes, playlistWithCustomDirectives
 } from "./test-m3u";
-import {M3uCustomDataMapping} from "../src/m3u-parser";
 
 describe('Parse and generate test', () => {
+
+    let parser: M3uParser;
+
+    beforeEach(() => {
+        parser = new M3uParser()
+    })
+
     it('should be same as original after parse and generate', () => {
-        expect(M3uParser.parse(complex).getM3uString()).toEqual(complex);
-        expect(M3uParser.parse(emptyAttributes).getM3uString()).toEqual(emptyAttributes);
+        expect(parser.parse(complex).getM3uString()).toEqual(complex);
+        expect(parser.parse(emptyAttributes).getM3uString()).toEqual(emptyAttributes);
     });
 
     it('should be parsed when random order of #EXTGRP directive is present', () => {
-        const parsed = M3uParser.parse(extGroupDirectiveOrder);
+        const parsed = parser.parse(extGroupDirectiveOrder);
         expect(parsed.medias[0].group).toEqual('Test TV group 1');
         expect(parsed.medias[1].group).toEqual('Test TV group 2');
     });
 
     it('should raise exception when first line is missing', () => {
         const stringWithoutFirstLine = extGroupDirectiveOrder.split('\n').slice(1).join('\n');
-        expect(() => M3uParser.parse(stringWithoutFirstLine)).toThrow(new Error('Missing #EXTM3U directive!'));
+        expect(() => parser.parse(stringWithoutFirstLine)).toThrow(new Error('Missing #EXTM3U directive!'));
     });
 
     it('should generate without playlist title', () => {
@@ -38,17 +44,18 @@ describe('Parse and generate test', () => {
     });
 
     it('should be parsed when no attributes are present', () => {
-        const parsed = M3uParser.parse(emptyAttributes);
+        const parsed = parser.parse(emptyAttributes);
         expect(Object.keys(parsed.medias[0].attributes)).toEqual([]);
         expect(Object.keys(parsed.medias[1].attributes)).not.toEqual([]);
     });
 
     it('should raise exception when parsing invalid m3u string', () => {
-        expect(() => M3uParser.parse('')).toThrow(new Error(`m3uString can't be null!`));
+        expect(() => parser.parse('')).toThrow(new Error(`m3uString can't be null!`));
     });
 
     it('should NOT raise exception when parsing invalid m3u string with ignoreErrors argument', () => {
-        expect(() => M3uParser.parse('', {ignoreErrors: true})).not.toThrow(new Error(`m3uString can't be null!`));
+        parser = new M3uParser({ignoreErrors: true});
+        expect(() => parser.parse('')).not.toThrow(new Error(`m3uString can't be null!`));
     });
 
     it('should parse with invalid attributes', () => {
@@ -68,11 +75,12 @@ describe('Parse and generate test', () => {
         const expectedPlaylist = new M3uPlaylist();
         expectedPlaylist.medias = [media1, media2]
 
-        expect(M3uParser.parse(invalidPlaylist, {ignoreErrors: true})).toEqual(expectedPlaylist);
+        parser = new M3uParser({ignoreErrors: true});
+        expect(parser.parse(invalidPlaylist)).toEqual(expectedPlaylist);
     });
 
     it('should parse url-tvg attribute', () => {
-        const playlist = M3uParser.parse(urlTvgTags);
+        const playlist = parser.parse(urlTvgTags);
         expect(playlist.urlTvg).toEqual('http://example.com/tvg.xml');
     });
 
@@ -83,7 +91,7 @@ describe('Parse and generate test', () => {
     });
 
     it('should parse extra attributes from url', () => {
-        const playlist = M3uParser.parse(playlistWithExtAttrFromUrl);
+        const playlist = parser.parse(playlistWithExtAttrFromUrl);
         expect(playlist.medias[0].extraAttributesFromUrl).toEqual('https://example.com/attributes.txt');
     });
 
@@ -104,7 +112,7 @@ describe('Parse and generate test', () => {
     });
 
     it('should parse extra http headers', () => {
-        const playlist = M3uParser.parse(playlistWithExtraHTTPHeaders);
+        const playlist = parser.parse(playlistWithExtraHTTPHeaders);
         expect(playlist.medias[0].extraHttpHeaders).toEqual(JSON.parse('{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"}'));
     });
 
@@ -126,7 +134,7 @@ describe('Parse and generate test', () => {
     });
 
     it('should parse kodi props', () => {
-        const playlist = M3uParser.parse(playlistWithKodiProps);
+        const playlist = parser.parse(playlistWithKodiProps);
         expect(playlist.medias[0].kodiProps).toEqual(new Map([
             [ 'inputstream.adaptive.manifest_type', 'm3u8' ],
             [ 'inputstream.adaptive.license_type', 'org.w3.clearkey' ],
@@ -156,7 +164,7 @@ describe('Parse and generate test', () => {
     });
 
     it('should parse extra props/attributes', () => {
-        const playlist = M3uParser.parse(playlistWithExtraProps);
+        const playlist = parser.parse(playlistWithExtraProps);
         expect(playlist.urlTvg).toEqual('http://example.com/tvg.xml');
         expect(playlist.attributes['url-tvg']).toEqual('http://example.com/tvg.xml');
         expect(playlist.attributes['url-logo']).toEqual('http://path/to/icons/root/');
@@ -191,15 +199,12 @@ describe('Parse and generate test', () => {
     });
 
     it('should parse invalid attributes', () => {
-        const playlist = M3uParser.parse(invalidExtM3uAttributes);
+        const playlist = parser.parse(invalidExtM3uAttributes);
         expect(playlist.attributes).toEqual(new M3uAttributes());
     });
 
     it('should parse and generate with custom directives', () => {
-        const customDataMapping: M3uCustomDataMapping = {
-            '#EXTCUSTOMPLAYLIST': false,
-            '#EXTCUSTOMMEDIA': true,
-        }
-        expect(M3uParser.parse(playlistWithCustomDirectives, {customDataMapping}).getM3uString()).toEqual(playlistWithCustomDirectives);
+        parser = new M3uParser({customDataMapping: {playlist: ['#EXTCUSTOMPLAYLIST'], media: ['#EXTCUSTOMMEDIA']}});
+        expect(parser.parse(playlistWithCustomDirectives).getM3uString()).toEqual(playlistWithCustomDirectives);
     })
 });

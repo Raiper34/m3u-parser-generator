@@ -9,13 +9,8 @@ import {
 /**
  * Custom data mapping, that defines parsing of unknown directives.
  * Directive can belong to whole playlist, or specific media.
- * Key is name of directive and value is if directive belongs to the specific media (otherwise whole playlist)
- * ```ts
- * {'#PlaylistDirective': false, '#MediaDirective': true}
- * ```
- * in this example #PlaylistDirective is configured as directive, that belongs to playlist and #MediaDirective to the specific media
  */
-export interface M3uCustomDataMapping {[key: string]: boolean}
+export interface M3uCustomDataMapping {media?: string[], playlist?: string[]}
 
 
 /**
@@ -38,12 +33,18 @@ export interface M3uParserConfig {
 export class M3uParser {
 
   /**
+   * Constructor of class
+   * @param config - to configure parser behaviour
+   */
+  constructor(private readonly config?: M3uParserConfig) { }
+
+  /**
    * Get m3u attributes object from attributes string
    * @param attributesString e.g. 'tvg-id="" group-title=""'
    * @returns attributes object e.g. {"tvg-id": "", "group-title": ""}
    * @private
    */
-  private static getAttributes(attributesString: string): M3uAttributes {
+  private getAttributes(attributesString: string): M3uAttributes {
     const attributes: M3uAttributes = new M3uAttributes();
     if (!attributesString) {
       return attributes;
@@ -62,7 +63,7 @@ export class M3uParser {
    * @param media - actual m3u media object
    * @private
    */
-  private static processMedia(trackInformation: string, media: M3uMedia): void {
+  private processMedia(trackInformation: string, media: M3uMedia): void {
     const lastCommaIndex = trackInformation.lastIndexOf(',');
     const durationAttributes = trackInformation.substring(0, lastCommaIndex);
     media.name = trackInformation.substring(lastCommaIndex + 1);
@@ -78,12 +79,11 @@ export class M3uParser {
   /**
    * Process directive method detects directive on line and call proper method to another processing
    * @param item - actual line of m3u playlist string e.g. '#EXTINF:-1 tvg-id="" group-title="",Tv Name'
-   * @param customDataMapping - whole custom directive data mapping configuration
    * @param playlist - m3u playlist object processed until now
    * @param media - actual m3u media object
    * @private
    */
-  private static processDirective(item: string, customDataMapping: M3uCustomDataMapping, playlist: M3uPlaylist, media: M3uMedia): void {
+  private processDirective(item: string, playlist: M3uPlaylist, media: M3uMedia): void {
     const firstSemicolonIndex = item.indexOf(':');
     const directive = item.substring(0, firstSemicolonIndex);
     const trackInformation = item.substring(firstSemicolonIndex + 1);
@@ -140,7 +140,7 @@ export class M3uParser {
         break;
       }
       default: {
-        this.processCustomData(playlist, media, trackInformation, directive, customDataMapping);
+        this.processCustomData(playlist, media, trackInformation, directive);
       }
     }
   }
@@ -151,22 +151,18 @@ export class M3uParser {
    * @param media - actual m3u media object
    * @param trackInformation - track information, whole part of string after directive and semicolon
    * @param directive - unknown directive e.g. #EXT-CUSTOM
-   * @param customDataMapping - whole custom directive data mapping configuration
    * @private
    */
-  private static processCustomData(
+  private processCustomData(
       playlist: M3uPlaylist,
       media: M3uMedia,
       trackInformation: string,
       directive: string,
-      customDataMapping: M3uCustomDataMapping,
   ): void {
-    if(directive in customDataMapping) {
-      if (customDataMapping[directive]) {
-        media.customData.push({directive, value: trackInformation});
-      } else {
-        playlist.customData.push({directive, value: trackInformation});
-      }
+    if (this.config?.customDataMapping?.media && this.config.customDataMapping.media.includes(directive)) {
+      media.customData.push({directive, value: trackInformation});
+    } else if (this.config?.customDataMapping?.playlist && this.config.customDataMapping.playlist.includes(directive)) {
+      playlist.customData.push({directive, value: trackInformation});
     }
   }
 
@@ -176,7 +172,7 @@ export class M3uParser {
    * @param playlist - m3u playlist object processed until now
    * @private
    */
-  private static processExtM3uAttributes(item: string, playlist: M3uPlaylist): void {
+  private processExtM3uAttributes(item: string, playlist: M3uPlaylist): void {
     if(item.startsWith(M3uDirectives.EXTM3U)) {
       const firstSpaceIndex = item.indexOf(' ');
       if(firstSpaceIndex > 0) {
@@ -189,11 +185,10 @@ export class M3uParser {
   /**
    * Get playlist returns m3u playlist object parsed from m3u string lines
    * @param lines - m3u string lines
-   * @param customDataMapping - whole custom directive data mapping configuration
    * @returns parsed m3u playlist object
    * @private
    */
-  private static getPlaylist(lines: string[], customDataMapping: M3uCustomDataMapping = {}): M3uPlaylist {
+  private getPlaylist(lines: string[]): M3uPlaylist {
     const playlist = new M3uPlaylist();
     let media = new M3uMedia('');
 
@@ -201,7 +196,7 @@ export class M3uParser {
 
     lines.forEach(item => {
       if (this.isDirective(item)) {
-        this.processDirective(item, customDataMapping, playlist, media);
+        this.processDirective(item, playlist, media);
       } else {
         media.location = item;
         playlist.medias.push(media);
@@ -217,7 +212,7 @@ export class M3uParser {
    * @returns true if it is line with directive, otherwise false
    * @private
    */
-  private static isDirective(item: string): boolean {
+  private isDirective(item: string): boolean {
     return item[0] === M3U_COMMENT;
   }
 
@@ -227,12 +222,12 @@ export class M3uParser {
    * @returns true if line starts with #EXTM3U, false otherwise
    * @private
    */
-  private static isValidM3u(firstLine: string[]): boolean {
+  private isValidM3u(firstLine: string[]): boolean {
     return firstLine[0].startsWith(M3uDirectives.EXTM3U);
   }
 
   /**
-   * Parse is static method to parse m3u playlist string into m3u playlist object.
+   * Parse is method to parse m3u playlist string into m3u playlist object.
    * Playlist need to contain #EXTM3U directive on first line.
    * All lines are trimmed and blank ones are removed.
    * @param m3uString - whole m3u playlist string
@@ -244,16 +239,16 @@ export class M3uParser {
    * playlist.medias.forEach(media => media.location);
    * ```
    */
-  static parse(m3uString: string, config?: M3uParserConfig): M3uPlaylist {
-    if (!config?.ignoreErrors && !m3uString) {
+  parse(m3uString: string): M3uPlaylist {
+    if (!this.config?.ignoreErrors && !m3uString) {
       throw new Error(`m3uString can't be null!`);
     }
 
     const lines = m3uString.split('\n').map(item => item.trim()).filter(item => item != '');
 
-    if (!config?.ignoreErrors && !this.isValidM3u(lines)) {
+    if (!this.config?.ignoreErrors && !this.isValidM3u(lines)) {
       throw new Error(`Missing ${M3uDirectives.EXTM3U} directive!`);
     }
-    return this.getPlaylist(lines, config?.customDataMapping);
+    return this.getPlaylist(lines);
   }
 }

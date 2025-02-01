@@ -31,7 +31,8 @@ You can parse your loaded m3u string:
 ```javascript
 import {M3uParser} from 'm3u-parser-generator';
 
-const playlist = M3uParser.parse(m3uString);
+const parser = new M3uParser();
+const playlist = parser.parse(m3uString);
 playlist.medias.forEach(media => media.location);
 ```
 and you get object with following structure
@@ -122,7 +123,8 @@ Import script into HTML file, and you can access classes through the global `m3u
     const media1 = new m3uParserGenerator.M3uMedia('http://my-stream-ulr.com/playlist.m3u8');
     playlist.medias.push(media1);
     
-    const parsedPlaylist = m3uParserGenerator.M3uParser.parse(m3uString);
+    const parser = new m3uParserGenerator.M3uParser();
+    const parsedPlaylist = parser.parse(m3uString);
 </script>
 ```
 
