@@ -21,7 +21,9 @@ Library to parse and generate [m3u or m3u8 IPTV playlist files](https://en.wikip
 - [📖 License](#-license)
 
 # 🚀 Instalation
-`npm install m3u-parser-generator --save`
+```sh
+npm install m3u-parser-generator --save
+```
 
 # 📚 Documentation
 [Online documentation](https://m3u-parser-generator.netlify.app/)
