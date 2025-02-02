@@ -11,10 +11,27 @@
   ],
   "repository": "https://github.com/Raiper34/m3u-parser-generator",
   "homepage": "https://m3u-parser-generator.netlify.app",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "author": "Raiper34",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/m3u-parser-generator.umd.cjs",
+  "module": "./dist/m3u-parser-generator.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/m3u-parser-generator.js",
+      "require": "./dist/m3u-parser-generator.umd.cjs"
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "test",
+    "CHANGELOG.md",
+    ".nvmrc"
+  ],
   "scripts": {
-    "build": "npx tsc && browserify dist/index.js -o dist/browser-bundle.js -s m3uParserGenerator && uglifyjs dist/browser-bundle.js -o dist/browser-bundle.min.js",
+    "build": "tsc && vite build",
     "start": "npm run build && node dist/main.js",
     "test": "vitest run --coverage",
     "test:dev": "vitest --ui --coverage",
@@ -28,15 +45,12 @@
     "commit": "cz",
     "prepare": "husky"
   },
-  "author": "Raiper34",
-  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/eslint__js": "^8.42.3",
     "@vitest/coverage-v8": "^3.0.1",
     "@vitest/ui": "^3.0.1",
     "auto-changelog": "^2.5.0",
-    "browserify": "^17.0.1",
     "commitizen": "^4.3.1",
     "coveralls": "^3.1.1",
     "cz-conventional-changelog": "^3.3.0",
@@ -47,7 +61,8 @@
     "typedoc": "^0.26.10",
     "typescript": "^5.6.0",
     "typescript-eslint": "^8.10.0",
-    "uglify-js": "^3.19.3",
+    "vite": "^6.0.11",
+    "vite-plugin-dts": "^4.5.0",
     "vitest": "^3.0.1"
   }
 }
