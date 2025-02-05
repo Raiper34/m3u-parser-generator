@@ -231,7 +231,6 @@ export class M3uParser {
    * Playlist need to contain #EXTM3U directive on first line.
    * All lines are trimmed and blank ones are removed.
    * @param m3uString - whole m3u playlist string
-   * @param config - additional parsing configuration
    * @returns parsed m3u playlist object
    * @example
    * ```ts
