@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [4.0.0](https://github.com/Raiper34/m3u-parser-generator/compare/3.0.0...4.0.0)
+#### [5.0.0](https://github.com/Raiper34/m3u-parser-generator/compare/4.0.0...5.0.0)
+
+- build(vite): add vite to build everrything with one tool and remove browserify and uglify [`da17e56`](https://github.com/Raiper34/m3u-parser-generator/commit/da17e5619c7940782359f35d0871433198e8f47e)
+- docs(readme): automatic version dump [`3398d61`](https://github.com/Raiper34/m3u-parser-generator/commit/3398d61fca8125f2384753f9926a4b64ae659a7a)
+- docs(readme): improve style of readme [`d972b7b`](https://github.com/Raiper34/m3u-parser-generator/commit/d972b7b688727cd116a2e06ebe8700e1c9817dd7)
+- docs(readme): change style of instruction code of instalation chapter [`789131a`](https://github.com/Raiper34/m3u-parser-generator/commit/789131a47597d95201e598f1507a9d2b99367919)
+
+### [4.0.0](https://github.com/Raiper34/m3u-parser-generator/compare/3.0.0...4.0.0)
+
+> 1 February 2025
 
 - feat(parser): change parser api [`8fac5f1`](https://github.com/Raiper34/m3u-parser-generator/commit/8fac5f16dc64fabe838a4c4b733b05720b922d91)
 - fix(kodiprops): remove default kodi props map, should be undefined by default [`b98bba5`](https://github.com/Raiper34/m3u-parser-generator/commit/b98bba5b81c56f7c84010888f373561770ff71a5)
