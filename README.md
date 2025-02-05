@@ -14,19 +14,24 @@
 Library to parse and generate [m3u or m3u8 IPTV playlist files](https://en.wikipedia.org/wiki/M3U). 
 
 ### Content
-- [🚀 Instalation](#-instalation)
+- [🚀 Installation](#-installation)
 - [📚 Documentation](#-documentation)
 - [💻 Usage](#-usage)
-    - [🌐 Usage in browser](#usage-in-browser)
-- [📖 License](#-license)
+    - [🌐 Browser](#-browser)
+- [⚖️ License](#-license)
 
-# 🚀 Instalation
+# 🚀 Installation
+Install **M3U Parser Generator** with npm
 ```sh
 npm install m3u-parser-generator --save
 ```
+or with jsdelivr
+```html
+<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@4.0.0/dist/browser-bundle.min.js"></script>
+```
 
 # 📚 Documentation
-[Online documentation](https://m3u-parser-generator.netlify.app/)
+[Documentation](https://m3u-parser-generator.netlify.app/)
 
 # 💻 Usage
 You can parse your loaded m3u string:
@@ -115,7 +120,7 @@ you get
 http://my-stream-ulr.com/playlist.m3u8
 ```
 
-# 🌐 Usage in browser
+# 🌐 Browser
 You can also use this library in the browser without compiling using jsDelivr.
 Import script into HTML file, and you can access classes through the global `m3uParserGenerator` object.
 ```html
@@ -130,5 +135,5 @@ Import script into HTML file, and you can access classes through the global `m3u
 </script>
 ```
 
-# 📖 License
-MIT
+# ⚖️ License
+[MIT](https://choosealicense.com/licenses/mit/)
