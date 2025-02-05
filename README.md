@@ -27,7 +27,7 @@ npm install m3u-parser-generator --save
 ```
 or with jsdelivr
 ```html
-<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@5.0.0/dist/browser-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@5.0.0/dist/m3u-parser-generator.iife.js"></script>
 ```
 
 # 📚 Documentation
@@ -124,7 +124,7 @@ http://my-stream-ulr.com/playlist.m3u8
 You can also use this library in the browser without compiling using jsDelivr.
 Import script into HTML file, and you can access classes through the global `m3uParserGenerator` object.
 ```html
-<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@5.0.0/dist/browser-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@5.0.0/dist/m3u-parser-generator.iife.js"></script>
 <script>
     const playlist = new m3uParserGenerator.M3uPlaylist();
     const media1 = new m3uParserGenerator.M3uMedia('http://my-stream-ulr.com/playlist.m3u8');
