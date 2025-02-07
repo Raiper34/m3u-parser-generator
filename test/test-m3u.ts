@@ -75,3 +75,10 @@ export const playlistWithCustomDirectives = `#EXTM3U
 http://iptv.test1.com/playlist.m3u8
 #EXTCUSTOMMEDIA:MEDIA2
 http://iptv.test1.com/playlist2.m3u8`
+
+
+export const commaNames = `#EXTM3U
+#PLAYLIST:Test Commas
+#EXTINF:-1,TiNGL - Pitch, Please
+#EXTART:Pitch, Please
+/Podcasts/somefile.mp3`
