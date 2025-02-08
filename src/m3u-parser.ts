@@ -64,9 +64,9 @@ export class M3uParser {
    * @private
    */
   private processMedia(trackInformation: string, media: M3uMedia): void {
-    const lastCommaIndex = trackInformation.lastIndexOf(',');
-    const durationAttributes = trackInformation.substring(0, lastCommaIndex);
-    media.name = trackInformation.substring(lastCommaIndex + 1);
+    const firstCommaIndex = trackInformation.indexOf(',');
+    const durationAttributes = trackInformation.substring(0, firstCommaIndex);
+    media.name = trackInformation.substring(firstCommaIndex + 1);
 
     const firstSpaceIndex = durationAttributes.indexOf(' ');
     const durationEndIndex = firstSpaceIndex > 0 ? firstSpaceIndex : durationAttributes.length;

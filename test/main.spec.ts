@@ -10,7 +10,9 @@ import {
     playlistWithExtraHTTPHeaders,
     playlistWithKodiProps,
     playlistWithExtraProps,
-    invalidExtM3uAttributes, playlistWithCustomDirectives
+    invalidExtM3uAttributes,
+    playlistWithCustomDirectives,
+    commaNames
 } from "./test-m3u";
 
 describe('Parse and generate test', () => {
@@ -23,6 +25,7 @@ describe('Parse and generate test', () => {
 
     it('should be same as original after parse and generate', () => {
         expect(parser.parse(complex).getM3uString()).toEqual(complex);
+        expect(parser.parse(commaNames).getM3uString()).toEqual(commaNames);
         expect(parser.parse(emptyAttributes).getM3uString()).toEqual(emptyAttributes);
     });
 
