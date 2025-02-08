@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [5.0.0](https://github.com/Raiper34/m3u-parser-generator/compare/4.0.0...5.0.0)
+#### [5.0.1](https://github.com/Raiper34/m3u-parser-generator/compare/5.0.0...5.0.1)
+
+- docs(website): modernize website api documentation [`38094f2`](https://github.com/Raiper34/m3u-parser-generator/commit/38094f2db99731598d2859036e2b15e6548ef803)
+- fix(parser): Change EXTINF parsing to split on first, not last, comma [`c8e4791`](https://github.com/Raiper34/m3u-parser-generator/commit/c8e479161dcc4ec3d5490631fa42a1647741481d)
+- docs(readme): fix browser jsdelivr link in readme [`fc105ad`](https://github.com/Raiper34/m3u-parser-generator/commit/fc105ad8fcb3f4d5438f6a629e6b1eac0b92f113)
+
+### [5.0.0](https://github.com/Raiper34/m3u-parser-generator/compare/4.0.0...5.0.0)
+
+> 5 February 2025
 
 - build(vite): add vite to build everrything with one tool and remove browserify and uglify [`da17e56`](https://github.com/Raiper34/m3u-parser-generator/commit/da17e5619c7940782359f35d0871433198e8f47e)
 - docs(readme): automatic version dump [`3398d61`](https://github.com/Raiper34/m3u-parser-generator/commit/3398d61fca8125f2384753f9926a4b64ae659a7a)
