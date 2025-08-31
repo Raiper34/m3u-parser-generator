@@ -17,17 +17,26 @@ Library to parse and generate [m3u or m3u8 IPTV playlist files](https://en.wikip
 - [🚀 Installation](#-installation)
 - [📚 Documentation](#-documentation)
 - [💻 Usage](#-usage)
-    - [🌐 Browser](#-browser)
 - [⚖️ License](#-license)
 
 # 🚀 Installation
-Install **M3U Parser Generator** with npm
+Install **M3U Parser Generator** with `npm`
 ```sh
 npm install m3u-parser-generator --save
 ```
-or with jsdelivr
+and import like
+```javascript
+import { M3uParser, M3uPlaylist, M3uMedia } from 'm3u-parser-generator';
+```
+Or add directly into an HTML file with `jsdelivr` CDN
 ```html
 <script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@5.0.1/dist/m3u-parser-generator.iife.js"></script>
+<script>
+  const M3uParser = m3uParserGenerator.M3uParser;
+  const M3uPlaylist = m3uParserGenerator.M3uPlaylist;
+  const M3uMedia = m3uParserGenerator.M3uMedia;
+  ...
+</script>
 ```
 
 # 📚 Documentation
@@ -36,8 +45,6 @@ or with jsdelivr
 # 💻 Usage
 You can parse your loaded m3u string:
 ```javascript
-import {M3uParser} from 'm3u-parser-generator';
-
 const parser = new M3uParser();
 const playlist = parser.parse(m3uString);
 playlist.medias.forEach(media => media.location);
@@ -97,8 +104,6 @@ and you get object with following structure
 
 Or you can generate new playlist by your own:
 ```javascript
-import {M3uPlaylist, M3uMedia} from 'm3u-parser-generator';
-
 const playlist = new M3uPlaylist();
 playlist.title = 'Test playlist';
 
@@ -118,21 +123,6 @@ you get
 #EXTINF:500 tvg-id="5" tvg-language="EN" unknown="my custom attribute",Test Channel
 #EXTGRP:Test Group
 http://my-stream-ulr.com/playlist.m3u8
-```
-
-# 🌐 Browser
-You can also use this library in the browser without compiling using jsDelivr.
-Import script into HTML file, and you can access classes through the global `m3uParserGenerator` object.
-```html
-<script src="https://cdn.jsdelivr.net/npm/m3u-parser-generator@5.0.1/dist/m3u-parser-generator.iife.js"></script>
-<script>
-    const playlist = new m3uParserGenerator.M3uPlaylist();
-    const media1 = new m3uParserGenerator.M3uMedia('http://my-stream-ulr.com/playlist.m3u8');
-    playlist.medias.push(media1);
-    
-    const parser = new m3uParserGenerator.M3uParser();
-    const parsedPlaylist = parser.parse(m3uString);
-</script>
 ```
 
 # ⚖️ License
